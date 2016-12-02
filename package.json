@@ -18,6 +18,7 @@
   "homepage": "https://github.com/g33ks-Hackathon/werewolf-game#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "knex": "^0.12.6",

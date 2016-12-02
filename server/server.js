@@ -1,5 +1,7 @@
 'use strict'
-
+if (process.env.NODE_ENV !== 'production') {
+   require('dotenv').config();
+}
  var express = require('express');
  var app = express();
  var http = require('http').Server(app);
@@ -25,7 +27,7 @@
  // Assign Routes to Server
  // app.use(login);
  // app.use(games);
- // app.use(chat);
+ app.use(chat);
 
 
  // Server Listener
