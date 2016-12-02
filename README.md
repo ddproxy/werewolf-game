@@ -1,2 +1,7 @@
 # werewolf-game
-SWITCH TO DEVELOPMENT BRANCH AND CLONE AND PUSH TO THAT BRANCH!
+
+FIRST THING:
+
+```
+git checkout -b development origin/development
+```
