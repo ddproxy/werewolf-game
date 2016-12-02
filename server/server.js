@@ -2,14 +2,14 @@
 
  var express = require('express');
  var app = express();
+ var http = require('http').Server(app);
  var bodyParser = require('body-parser');
  var port = process.env.PORT || 3000;
- var ejs = require('ejs');
- var knex = require('./db.js');
+ var knex = require('../db/knex');
 
  // Middleware
  app.disable('x-powered-by');
- app.set('view engine', 'ejs');
+ // app.set('view engine', 'ejs');
  app.use(express.static(__dirname + '/public'));
  app.use(bodyParser.urlencoded({
  extended: false
@@ -18,9 +18,15 @@
 
  // Declare routes variables
  var login = require('./routes/login');
+ var games = require('./routes/games');
+ var chat = require('./routes/chat');
+
 
  // Assign Routes to Server
- app.use(login);
+ // app.use(login);
+ // app.use(games);
+ // app.use(chat);
+
 
  // Server Listener
  app.listen(port, function() {
