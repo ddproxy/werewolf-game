@@ -1,15 +1,6 @@
 # werewolf-game
 
-FIRST THING:
-
-```
-git checkout -b development origin/development
-
-git checkout -b [YOUR-NAME]
-```
-
-This will set you up to be pushing to the development branch
-use the same feature branch workflow
+##Git Workflow
 
 work in your own personal branch.
 pull from development branch other changes.
