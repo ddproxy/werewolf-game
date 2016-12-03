@@ -1,52 +1,35 @@
 app.factory('moderatorFactory', ['$location', function($location) {
+  function Moderator() {
+
+    this.gameObject = {};
+
+    this.userList = [];
+
+    this.start = function () {
+      //randomly assigns each user with their class
+      var roles = ["Citizen", "Citizen", "Citizen", "Werewolf", "Werewolf", "WitchDoctor", "Hunter", "FortuneTeller"];
+
+      if (this.userList.length < 8) {
+        console.log("Wait till the room is full");
+      } else {
+        for (i = 0; i <= 7; i++) {
+          this.gameObject[this.userList[i]] = new Player(roles[i]);
+        }
+        console.log("assigning roles");
+        $location.url('/game');
+      }
+
+    }
+  }
+
   return new Moderator();
+
 }]);
 
-function Moderator() {
+function Player(role) {
 
-  this.gameObject = {};
-
-  this.userList = [];
-
-  this.start = function () {
-    console.log("this.start function, oh hai");
-
-    //randomly assigns each user with their class
-    var classes = [Citizen(), Citizen(), Citizen(), Werewolf(), Werewolf(), FortuneTeller(), WitchDoctor(), Hunter()];
-
-    if (this.userList.length < 8) {
-      console.log("Wait till the room is full");
-    } else {
-      for (i = 0; i <= 7: i++) {
-
-      }
-    }
-
-  }
-}
-
-function Citizen() {
   this.awake = true;
   this.alive = true;
-}
-
-function Werewolf() {
-  this.awake = true;
-  this.alive = true;
-}
-
-function FortuneTeller() {
-  this.awake = true;
-  this.alive = true;
-}
-
-function WitchDoctor() {
-  this.awake = true;
-  this.alive = true;
-  this.usedPower = false;
-}
-
-function Hunter() {
-  this.awake = true;
-  this.alive = true;
+  this.role = role;
+  
 }
