@@ -3,7 +3,7 @@
 
  const express = require('express');
  const router = express.Router();
- var knex = require('../../db/knex');
+const knex = require('../../knex');
 
  router.get('/moderator', function(req, res){
    res.send("moderator api");
