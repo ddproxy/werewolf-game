@@ -1,0 +1,23 @@
+<h1>Waiting Room</h1>
+
+{{message}}
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th class="ten wide">Users Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in view.users">
+      <td>{{user}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>{{view.userCount}}</th>
+    </tr>
+  </tfoot>
+</table>
+
+<button class="ui positive basic button" ng-click="view.gameStart()">Start Game</button>

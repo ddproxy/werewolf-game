@@ -10,7 +10,7 @@ app.config(function($routeProvider, $locationProvider) {
       controller: 'homeController'
     })
     .when('/waitingroom', {
-      templateUrl: 'partials/joingame.html',
+      templateUrl: 'partials/waitingroom.html',
       controller: 'waitingRoomController',
     })
     .when('/game', {
