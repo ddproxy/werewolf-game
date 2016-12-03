@@ -1,12 +1,42 @@
 <h1>Game page</h1>
 
-<div class="chat">
-
-  <ul id="messages"></ul>
-      <li ng-repeat='message in messages'>{{message}}</li>
-      <form action="">
-        <input ng-model='view.input' id="m" autocomplete="off" />
-        <button ng-click='submit()'>Send</button>
-      </form>
-
+<div class="ui stackable grid wholeframe">
+  <div class="row">
+    <div class="four wide column">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, deserunt et dolorum in quae sapiente doloremque provident excepturi, ducimus voluptatibus asperiores cumque consectetur neque numquam a ut laudantium animi sed.</p>
+    </div>
+    <div class="six wide column">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quo repudiandae doloribus illum veritatis, quisquam, laudantium vero vel laborum quasi unde mollitia, doloremque nihil? Quas facere dolorum dolor, quo aperiam.</p>
+    </div>
+    <div class="six wide column">
+      <div class="row">
+        <ul id="messages">
+          <li ng-repeat='message in messages'>{{message}}</li>
+        </ul>
+      </div>
+      <div class="bottom aligned row">
+        <form action="">
+          <input ng-model='view.input' id="m" autocomplete="off" />
+          <button ng-click='submit()'>Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
+<!-- <div class="chat">
+
+  <ul id="messages">
+    <li ng-repeat='message in messages'>{{message}}</li>
+  </ul>
+  <form action="">
+    <input ng-model='view.input' id="m" autocomplete="off" />
+    <button ng-click='submit()'>Send</button>
+  </form>
+
+</div> -->

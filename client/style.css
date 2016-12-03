@@ -18,3 +18,7 @@
 .ui.action.input {
     text-align: center;
 }
+
+.wholeframe {
+  height: 100vh;
+}
