@@ -1,1 +1,22 @@
-<h1>login page</h1>
+<h1 class="ui center aligned header">Log In</h1>
+
+
+
+
+<div class="form-wrapper">
+    <form class="ui centered form">
+
+        <label>Email Address:</label>
+        <input type="email" name="email" ng-model="login.email">
+
+        <label>Password:</label>
+        <input type="password" name="password" ng-model="login.password">
+
+
+        <button id="signup-submit" class='fluid ui blue button' type="button" ng-click='getToken(sendAlert)'>Submit</button>
+
+
+
+    </form>
+</div>
+ 

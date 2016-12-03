@@ -1,5 +1,5 @@
 
-var app = angular.module('Werewolf', ['ngRoute']);
+var app = angular.module('Werewolf', ['ngRoute', 'ngStorage']);
 
 
 
