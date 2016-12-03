@@ -15,8 +15,7 @@ app.controller('signupController', ['$scope', '$http', '$location', 'AuthFactory
                         method: 'GET',
                         url: '/api/me',
                     }).then(function(response) {
-                        $localStorage.currentUser.pnumber = response.data.sub;
-                        $location.url('/survey')
+                        $location.url('/')
                     })
                 } else {}
             })

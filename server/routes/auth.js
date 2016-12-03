@@ -11,7 +11,7 @@ router.post('/token', function(req, res) {
     knex('users').where('username', req.body.username).then((user) => {
         bcrypt.compare(req.body.password, user[0].hashed_password)
             .then(function(data) {
-                knex('users').where('email', req.body.email).then((user) => {
+                knex('users').where('username', req.body.username).then((user) => {
 
                     var token = jwt.sign({
                         iss: "Werewolf Game",

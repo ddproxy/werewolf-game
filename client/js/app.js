@@ -25,6 +25,10 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'partials/login.html',
         controller: 'loginController',
     })
+    .when('/logout', {
+        templateUrl: 'partials/logout.html',
+        controller: 'logoutController',
+    })
     .when('/about', {
         templateUrl: 'partials/about.html',
         controller: 'aboutController',

@@ -12,6 +12,7 @@
     "express-session": "^1.14.2",
     "foreman": "^2.0.0",
     "jasmine": "^2.5.2",
+    "jsonwebtoken": "^7.1.9",
     "knex": "^0.12.6",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0",

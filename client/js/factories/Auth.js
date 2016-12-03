@@ -3,7 +3,7 @@ app.factory('AuthFactory', function($http, $localStorage) {
 
     service.Login = (username, password, callback) => {
             $http.post('/api/token', {
-                email: email,
+                username: username,
                 password: password
             }).then(function(response) {
                 if (response.data) {

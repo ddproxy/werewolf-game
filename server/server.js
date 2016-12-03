@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 var moderators = require('./routes/moderators');
 var gameplay = require('./routes/gameplay');
 var users = require('./routes/users');
+var auth = require('./routes/auth');
 
 
 
@@ -30,6 +31,7 @@ var users = require('./routes/users');
 app.use('/api', moderators);
 app.use('/api', gameplay);
 app.use('/api', users);
+app.use('/api', auth);
 
 
 
