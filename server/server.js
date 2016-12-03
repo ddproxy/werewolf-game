@@ -11,6 +11,19 @@ var port = process.env.PORT || 3000;
 var knex = require('../knex');
 const path = require('path');
 
+var forceSsl = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+ };
+
+ app.configure(function () {
+
+    if (process.env.NODE_ENV === 'production') {
+        app.use(forceSsl);
+    }
+
 // Middleware
 app.disable('x-powered-by');
 app.use(express.static(path.join(__dirname, '../client')));
