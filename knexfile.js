@@ -1,6 +1,6 @@
 // Update with your config settings.
 
-process.env.DATABASE_URL.sslmode = "require";
+// process.env.DATABASE_URL.sslmode = "require";
 
 module.exports = {
 
