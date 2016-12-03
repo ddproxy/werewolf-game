@@ -5,7 +5,9 @@
   "main": "server/server.js",
   "scripts": {
     "test": "mocha",
-    "start": "node server/server.js"
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest",
+    "nodemon": "nodemon server.js"
   },
   "keywords": [
     "heroku"
@@ -20,7 +22,7 @@
     "url": "https://github.com/g33ks-Hackathon/werewolf-game/issues"
   },
   "engines": {
-    "node": "6.4.0"
+    "node": "v6.4.0"
   },
   "homepage": "https://github.com/g33ks-Hackathon/werewolf-game#readme",
   "dependencies": {
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "foreman": "^2.0.0",
     "jasmine": "^2.5.2",
     "mocha": "^3.2.0",
     "morgan": "^1.7.0",
