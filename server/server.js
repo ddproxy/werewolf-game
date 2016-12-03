@@ -20,19 +20,23 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Declare routes variables
-// var login = require('./routes/login');
-// var games = require('./routes/games');
-// var chat = require('./routes/chat');
+var moderators = require('./routes/moderators');
+var gameplay = require('./routes/gameplay');
+
 
 
 // Assign Routes to Server
-// app.use(login);
-// app.use(games);
-// app.use(chat);
+app.use('/api', moderators);
+app.use('/api', gameplay);
+
 
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../client', 'index.html'));
+})
+
+app.get('/api', function(req, res) {
+    res.send("I'm an api");
 })
 
 
