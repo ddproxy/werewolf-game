@@ -28,7 +28,7 @@
         "test": "mocha",
         "nodemon": "nodemon server/server.js",
         "knex": "knex",
-        "heroku-postbuild": "knex migrate:latest"
+        "heroku-postbuild": "knex migrate:latest --knexfile db/knexfile.js"
     },
     "repository": {
         "type": "git",
