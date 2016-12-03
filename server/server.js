@@ -12,8 +12,7 @@ const path = require('path');
 
 // Middleware
 app.disable('x-powered-by');
-// app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
