@@ -1,8 +1,20 @@
 .form-wrapper {
-  margin-left: 18vw;
-  margin-right: 18vw;
+    margin-left: 18vw;
+    margin-right: 18vw;
 }
 
 .form-wrapper input {
-  margin-bottom: 10vh;
+    margin-bottom: 10vh;
+}
+
+.huge.ui.button {
+    float: right;
+}
+
+#welcome {
+    text-align: center;
+}
+
+.ui.action.input {
+    text-align: center;
 }

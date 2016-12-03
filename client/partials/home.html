@@ -1,5 +1,26 @@
+<div class="">
 
-<h1>homepage</h1>
+    <h1 id="welcome">Choose a game or join your friends!</h1>
+
+    <div class="">
+        <button class="huge ui button" ng-click="view.go()">
+          Create New Game
+        </button>
+    </div>
+
+    <div class="ui action input">
+        <input type="text" placeholder="Enter your access code...">
+        <button class="ui button" ng-click="view.go()">Join</button>
+    </div>
 
 
-{{message}}
+    <div class="ui link list">
+        <div class="active item">Open Games:</div>
+        <a class="item" ng-click="view.go()">Game 1</a>
+        <a class="item" ng-click="view.go()">Game 2</a>
+        <a class="item" ng-click="view.go()">Game 3</a>
+    </div>
+
+
+
+</div>
