@@ -3,8 +3,10 @@
 <div class="chat">
 
   <ul id="messages"></ul>
+      <li ng-repeat='message in messages'>{{message}}</li>
       <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+        <input ng-model='view.input' id="m" autocomplete="off" />
+        <button ng-click='submit()'>Send</button>
       </form>
 
 </div>
