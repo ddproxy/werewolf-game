@@ -41,7 +41,4 @@
         "morgan": "^1.7.0",
         "protractor": "^4.0.11"
     },
-    "engines": {
-        "node": "DEV_VERSION"
-    }
 }
