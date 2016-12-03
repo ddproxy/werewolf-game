@@ -4,8 +4,12 @@
   "description": "Computer Version of the game Werewolf",
   "main": "server/server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server/server.js"
   },
+  "keywords": [
+    "heroku"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g33ks-Hackathon/werewolf-game.git"
@@ -15,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/g33ks-Hackathon/werewolf-game/issues"
   },
+  "engines": {
+    "node": "6.4.0"
+  },
   "homepage": "https://github.com/g33ks-Hackathon/werewolf-game#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -22,7 +29,6 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "knex": "^0.12.6",
-    "node": "6.4.0",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "pg": "^6.1.0",
