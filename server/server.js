@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
 var knex = require('../db/knex');
@@ -38,8 +39,11 @@ app.get('/api', function(req, res) {
     res.send("I'm an api");
 })
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 
 // Server Listener
-app.listen(port, function() {
+http.listen(port, function() {
     console.log('listening on port: ' + port);
 });
