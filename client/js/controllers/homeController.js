@@ -5,7 +5,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window',
         $scope.view = {};
 
         $scope.view.go = function() {
-            $location.url('/watingroom');
+            $location.url('/waitingroom');
         }
 
 
