@@ -7,13 +7,16 @@ app.factory('moderatorFactory', ['$location', function($location) {
 
     this.start = function () {
       //randomly assigns each user with their class
-      var roles = ["Citizen", "Citizen", "Citizen", "Werewolf", "Werewolf", "WitchDoctor", "Hunter", "FortuneTeller"];
+      var roles = ["citizen", "citizen", "citizen", "werewolf", "werewolf", "witchdoctor", "hunter", "fortuneteller"];
 
       if (this.userList.length < 8) {
         console.log("Wait till the room is full");
       } else {
         for (i = 0; i <= 7; i++) {
           this.gameObject[this.userList[i]] = new Player(roles[i]);
+          if (roles[i] === "witchdoctor") {
+            this.gameObject[this.userList[i]].usedSave = false;
+          }
         }
         console.log("assigning roles");
         $location.url('/game');
@@ -31,5 +34,5 @@ function Player(role) {
   this.awake = true;
   this.alive = true;
   this.role = role;
-  
+
 }
