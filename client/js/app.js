@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 var app = angular.module('Werewolf', ['ngRoute']);
-=======
-var app = angular.module('Werewolf', []);
->>>>>>> master
 
 
 app.config(function($routeProvider, $locationProvider) {
