@@ -25,4 +25,8 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'partials/login.html',
         controller: 'loginController',
     })
+    .when('/about', {
+        templateUrl: 'partials/about.html',
+        controller: 'aboutController',
+    })
 });

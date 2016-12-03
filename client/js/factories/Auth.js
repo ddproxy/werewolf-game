@@ -1,7 +1,7 @@
 app.factory('AuthFactory', function($http, $localStorage) {
     var service = {};
 
-    service.Login = (email, password, callback) => {
+    service.Login = (username, password, callback) => {
             $http.post('/api/token', {
                 email: email,
                 password: password
@@ -9,8 +9,8 @@ app.factory('AuthFactory', function($http, $localStorage) {
                 if (response.data) {
                     // store username and token in local storage to keep user logged in between page refreshes
                     $localStorage.currentUser = {
-                        email: email,
-                        token: response.data
+                        token: response.data,
+                        username: username
                     };
 
                     $http.defaults.headers.common.Authorization = response.data

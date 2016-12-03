@@ -8,18 +8,17 @@ const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
 router.post('/token', function(req, res) {
-    knex('users').where('email', req.body.email).then((user) => {
+    knex('users').where('username', req.body.username).then((user) => {
         bcrypt.compare(req.body.password, user[0].hashed_password)
             .then(function(data) {
                 knex('users').where('email', req.body.email).then((user) => {
 
                     var token = jwt.sign({
-                        iss: "StaySafe",
-                        sub: user[0].pnumber,
-                        email: user[0].email
+                        iss: "Werewolf Game",
+                        username: user[0].username
 
                     }, 'secret', {
-                        expiresIn: '1h'
+                        expiresIn: '4h'
                     });
                     res.send(token)
                 })
