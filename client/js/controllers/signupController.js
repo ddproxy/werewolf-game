@@ -3,8 +3,8 @@ app.controller('signupController', ['$scope', '$http', '$location', '$window', '
     $scope.view = {};
     $scope.newUser = {};
 
-    $scope.submitSignup(obj){
-      
+    $scope.submitSignup = function(obj){
+
     }
 
 }]);
