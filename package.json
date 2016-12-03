@@ -1,43 +1,43 @@
 {
-  "name": "werewolf-game",
-  "version": "1.0.0",
-  "description": "Werewolf game",
-  "main": "server/server.js",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "chai": "^3.5.0",
-    "express": "^4.14.0",
-    "express-session": "^1.14.2",
-    "foreman": "^2.0.0",
-    "jasmine": "^2.5.2",
-    "knex": "^0.12.6",
-    "morgan": "^1.7.0",
-    "nodemon": "^1.11.0",
-    "path": "^0.12.7",
-    "pg": "^6.1.0",
-    "protractor": "^4.0.11",
-    "socket.io": "^1.7.1"
-  },
-  "devDependencies": {
-    "mocha": "^3.2.0"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/g33ks-Hackathon/werewolf-game.git"
-  },
-  "keywords": [
-    "heroku"
-  ],
-  "author": "Tosin Awofeso <midastouchproductions@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/g33ks-Hackathon/werewolf-game/issues"
-  },
-  "homepage": "https://github.com/g33ks-Hackathon/werewolf-game#readme",
-  "engines": {
-  "node": "4.1.1"
-}
+    "name": "werewolf-game",
+    "version": "1.0.0",
+    "description": "Werewolf game",
+    "main": "server/server.js",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "chai": "^3.5.0",
+        "express": "^4.14.0",
+        "express-session": "^1.14.2",
+        "foreman": "^2.0.0",
+        "jasmine": "^2.5.2",
+        "knex": "^0.12.6",
+        "morgan": "^1.7.0",
+        "nodemon": "^1.11.0",
+        "path": "^0.12.7",
+        "pg": "^6.1.0",
+        "protractor": "^4.0.11",
+        "socket.io": "^1.7.1"
+    },
+    "devDependencies": {
+        "mocha": "^3.2.0"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/g33ks-Hackathon/werewolf-game.git"
+    },
+    "keywords": [
+        "heroku"
+    ],
+    "author": "Tosin Awofeso <midastouchproductions@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/g33ks-Hackathon/werewolf-game/issues"
+    },
+    "homepage": "https://github.com/g33ks-Hackathon/werewolf-game#readme",
+    "engines": {
+        "node": "6.4.0"
+    }
 }
