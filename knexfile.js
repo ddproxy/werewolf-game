@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+process.env.DATABASE_URL.ssl = true;
+
 module.exports = {
 
     development: {
@@ -20,7 +22,7 @@ module.exports = {
 
     production: {
         client: 'pg',
-        ssl: true,
+
         connection: process.env.DATABASE_URL,
     }
 };
