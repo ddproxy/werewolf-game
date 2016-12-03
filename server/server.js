@@ -22,12 +22,14 @@ app.use(bodyParser.json());
 // Declare routes variables
 var moderators = require('./routes/moderators');
 var gameplay = require('./routes/gameplay');
+var users = require('./routes/users');
 
 
 
 // Assign Routes to Server
 app.use('/api', moderators);
 app.use('/api', gameplay);
+app.use('/api', users);
 
 
 
