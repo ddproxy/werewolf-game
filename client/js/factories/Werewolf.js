@@ -1,10 +1,10 @@
-app.factory('citizenClass', function() {
-  return Citizen();
+app.factory('werewolfClass', function() {
+  return Werewolf();
 }]);
 
-function Citizen() {
+function Werewolf() {
 
-  this.awakeAtNight = false;
+  this.awakeAtNight = true;
 
   // this.launchedCount = 0;
   // this.launch = function() {
