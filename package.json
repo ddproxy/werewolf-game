@@ -23,8 +23,6 @@
     },
     "scripts": {
         "test": "mocha",
-        "knex": "knex",
-        "heroku-postbuild": "knex migrate:latest",
         "nodemon": "nodemon server/server.js"
     },
     "repository": {
