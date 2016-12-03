@@ -17,11 +17,11 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'partials/game.html',
         controller: 'gameController',
     })
-    .when('signup', {
+    .when('/signup', {
         templateUrl: 'partials/signup.html',
         controller: 'signupController',
     })
-    .when('login', {
+    .when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'loginController',
     })
