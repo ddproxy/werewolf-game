@@ -1,6 +1,9 @@
-// Update with your config settings.
 
-// process.env.DATABASE_URL.sslmode = "require";
+'use strict';
+
+require('dotenv').config();
+const pg = require('pg');
+pg.defaults.ssl = true;
 
 module.exports = {
 
