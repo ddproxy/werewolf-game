@@ -1,4 +1,4 @@
-const app = angular.module("Werewolf", ["ngRoute"]);
+var app = angular.module('Werewolf', []);
 
 
 app.config(function($routeProvider, $locationProvider) {
