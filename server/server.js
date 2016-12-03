@@ -11,18 +11,19 @@ var port = process.env.PORT || 3000;
 var knex = require('../knex');
 const path = require('path');
 
-var forceSsl = function (req, res, next) {
+var forceSsl = function(req, res, next) {
     if (req.headers['x-forwarded-proto'] !== 'https') {
         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     return next();
- };
+};
 
- app.configure(function () {
+app.configure(function() {
 
     if (process.env.NODE_ENV === 'production') {
         app.use(forceSsl);
     }
+});
 
 // Middleware
 app.disable('x-powered-by');
@@ -56,24 +57,24 @@ app.get('/api', function(req, res) {
     res.send("I'm an api");
 })
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+io.on('connection', function(socket) {
+    console.log('a user connected');
+    socket.on('disconnect', function() {
+        console.log('user disconnected');
+    });
 });
 
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-  });
+io.on('connection', function(socket) {
+    socket.on('chat message', function(msg) {
+        console.log('message: ' + msg);
+    });
 });
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+io.on('connection', function(socket) {
+    socket.on('chat message', function(msg) {
+        io.emit('chat message', msg);
+    });
 });
 
 
