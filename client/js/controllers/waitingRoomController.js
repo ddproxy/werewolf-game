@@ -2,7 +2,7 @@ app.controller('waitingRoomController',
 	['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$routeParams',
 	 function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
-		 socket.on('runDigestLoop', function(){
+		 socket.on('runDigestLoop-', function(){
 			 console.log('ALLRIGHT....here is that new shit!');
 			 $scope.$digest();
 		 })
@@ -23,5 +23,23 @@ app.controller('waitingRoomController',
 		 $scope.view.gameStart = function () {
 			 moderatorFactory.start();
 		 }
+
+		 $scope.rightUser = function(num){
+			 if (num === $routeParams.gameid) {
+			 		return true;
+			 } else {
+				 return false
+			 }
+		 }
+
+		 $scope.uniqueUser = function(name){
+			 for (var i = 0; i < $scope.view.users.length; i++) {
+			 	if ($scope.view.users[i].username === name) {
+			 		return false;
+			 	}
+			 }
+			 return true;
+		 }
+
 	 }
 	]);

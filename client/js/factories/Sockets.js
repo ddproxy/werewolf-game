@@ -1,10 +1,10 @@
-app.factory('SocketFactory', function($http, $localStorage) {
+app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
     var obj = {};
     var gameList = [];
 
 
     socket.on('addToWaitingRoom', function(data) {
-        gameList.push(data);
+        gameList = data;
         socket.emit('update');
     })
 

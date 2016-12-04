@@ -14,6 +14,7 @@
     "jasmine": "^2.5.2",
     "jsonwebtoken": "^7.1.9",
     "knex": "^0.12.6",
+    "lodash": "^4.17.2",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",

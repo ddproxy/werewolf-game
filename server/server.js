@@ -10,24 +10,71 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
 var knex = require('../knex');
 const path = require('path');
+var _ = require('lodash');
+const jwt = require('jsonwebtoken');
+var usersOnline = [];
 
-
+//open page
 io.on('connection', function(socket) {
+    let usersPlayingList = []
+    let currentUser = false;
     console.log('connected');
 
-    socket.on('disconnect', function() {
-        console.log('disconnected');
-    })
+    //on login
+    socket.on('authenticated', function(token) {
+        if (jwt.verify(token, 'secret', function(err, decoded) {
+                if (decoded) {
+                  console.log("auth");
+                    currentUser = {
+                        username: decoded.username,
+                        socket: socket
+                    }
+                    usersOnline.push(currentUser);
 
-    socket.on('joingame', function(gamedata) {
-        console.log("I'mma tell you bruh");
-        io.emit('addToWaitingRoom', gamedata);
-    })
 
-    socket.on('update', function(){
-      console.log("oh you want that new shit?");
-      io.emit('runDigestLoop');
-    })
+                    socket.on('joingame', function(roomNumber) {
+                        if (!_.find(usersPlayingList, currentUser)) {
+                            currentUser.room = roomNumber;
+                            usersPlayingList.push(currentUser)
+                        }
+
+                        var needsToKnow = _.filter(usersPlayingList, function(user) {
+                          return user.room == roomNumber;
+                        });
+
+                        needsToKnow.map(user => { user.socket.emit(listOfUsersInRoom) });
+
+
+
+
+
+
+
+
+                        // io.emit('addToWaitingRoom', _.filter(usersPlayingList, (user) => {
+                        //     return user.gameid == gamedata.gameid;
+                        // }));
+                    })
+
+                    socket.on('update', function() {
+                        console.log("oh you want that new shit?");
+                        io.emit('runDigestLoop');
+                    })
+                }
+            }))
+
+
+
+            socket.on('disconnect', function() {
+            if (currentUser) {
+                _.remove(usersOnline, currentUser)
+                currentUser = false;
+            }
+            console.log('disconnected');
+        })
+
+
+    });
 });
 
 

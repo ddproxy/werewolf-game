@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="user in view.users track by $index">
-      <td>{{user.username}}</td>
+      <td ng-if="rightUser(user.gameid)">{{user.username}}</td>
     </tr>
   </tbody>
   <tfoot>

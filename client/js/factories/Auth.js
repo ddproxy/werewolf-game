@@ -14,6 +14,7 @@ app.factory('AuthFactory', function($http, $localStorage) {
                     };
 
                     $http.defaults.headers.common.Authorization = response.data
+                    socket.emit('authenticated', response.data);
 
 
                     // execute callback with true to indicate successful login
