@@ -6,7 +6,12 @@
 const knex = require('../../knex');
 
  router.get('/gameplay/:gameid', function(req, res){
-   //
+   knex('games').insert({
+     title: req.body.title,
+     id: req.body.id
+   }).then(function(){
+     res.send("yay")
+   })
  })
 
 

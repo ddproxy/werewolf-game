@@ -37,8 +37,12 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
               title: title,
               id: id,
             }
-            console.log(obj);
-            $scope.view.games.push(obj);
+            // console.log(obj);
+            // $scope.view.games.push(obj);
+
+            $http.post('/api/gameplay/', obj).then(function(response){
+              console.log(response.data);
+            })
 
         }
 
