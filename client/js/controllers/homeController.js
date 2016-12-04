@@ -3,8 +3,12 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.message = 'controller is booyah'
 
         $scope.view = {};
-        $scope.view.games = [];
+        $scope.view.games;
         $scope.view.showForm = false;
+
+        $http.get('/api/gameplay/opengames').then(function(response){
+            $scope.view.games = response.data
+        })
 
 
         $scope.view.go = function(num) {
@@ -27,7 +31,6 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
 
 
             $scope.view.randomId = text;
-
         }
 
         $scope.addGame = function(title, id) {
@@ -47,7 +50,6 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
             })
 
         }
-
 
     }
 ]);

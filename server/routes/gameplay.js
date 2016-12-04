@@ -20,5 +20,11 @@ router.post('/gameplay/newgame', function(req, res) {
     })
 })
 
+router.get('/gameplay/opengames', function(req, res){
+  knex('games').then(function(games){
+    res.json(games);
+  })
+})
+
 
 module.exports = router;
