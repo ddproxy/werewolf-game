@@ -1,12 +1,20 @@
-app.controller('waitingRoomController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
-  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
-    $scope.message = "This is the waiting room";
+var socket = io();
+
+app.controller('waitingRoomController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$routeParams',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
+
+
 
     $scope.view = {};
 
-    //When you join the waiting room you are pushed into the user list
-    $scope.view.users = ["Tosin", "Taylor", "Jeannie", "Frank", "Joey", "Tim", "Chris", "Zubair"];
 
+
+    //When you join the waiting room you are pushed into the user list
+    $scope.view.users = [];
+
+    socket.on('addToWaitingRoom', function(data){
+      console.log("the user " + data.username + "has joined");
+    })
     //Update the moderatorFactory everytime a new user is pushed into the list
     moderatorFactory.userList = $scope.view.users;
 

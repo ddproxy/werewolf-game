@@ -30,7 +30,7 @@
 
     <div class="ui link list">
         <div class="active item">Open Games:</div>
-        <a ng-repeat='game in view.games' class="item">{{game.title}} - | - {{game.id}}</a>
+        <a ng-repeat='game in view.games' class="item" ng-click='view.go(game.id)'>{{game.title}} - | - {{game.id}}</a>
     </div>
 
 

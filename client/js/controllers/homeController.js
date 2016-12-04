@@ -1,3 +1,5 @@
+var socket = io();
+
 app.controller('homeController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage',
     function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage) {
         $scope.message = 'controller is booyah'
@@ -16,7 +18,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
                 username: $localStorage.currentUser.username,
                 gameid: num
             })
-            $location.url('/waitingroom');
+            $location.url('/waitingroom/' + num);
         }
 
         $scope.createGame = function() {
@@ -40,7 +42,6 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
                 id: id,
                 username: $localStorage.currentUser.username
             }
-            console.log(obj);
             // $scope.view.games.push(obj);
 
             $http.post('/api/gameplay/newgame', obj).then(function(response) {

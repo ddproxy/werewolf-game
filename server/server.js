@@ -13,10 +13,11 @@ const path = require('path');
 
 
 io.on('connection', function(socket) {
-  socket.on('joingame', function(gamedata){
-    //send to game table with id and username
-    console.log(gamedata);
-  })
+    console.log('connected');
+    socket.on('joingame', function(gamedata) {
+        console.log("this is the game data: " + gamedata);
+        socket.emit('addToWaitingRoom', gamedata);
+    })
 });
 
 
