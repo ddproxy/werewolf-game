@@ -1,5 +1,5 @@
-app.controller('loginController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
-  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
+app.controller('loginController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', 'AuthFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory, AuthFactory) {
 
 
     $scope.view = {};

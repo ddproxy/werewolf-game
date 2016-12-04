@@ -13,11 +13,9 @@ const path = require('path');
 
 
 io.on('connection', function(socket) {
-    console.log("connected fool");
-    socket.emit('username', {
-        username: "username"
-    });
-    socket.emit('token', "token");
+  socket.on('joingame', function(gamedata){
+    console.log(gamedata);
+  })
 });
 
 

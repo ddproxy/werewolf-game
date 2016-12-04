@@ -1,5 +1,5 @@
-app.controller('signupController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
-  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
+app.controller('signupController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', 'AuthFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory, AuthFactory) {
 
     $scope.view = {};
     $scope.view.test = 'Sign Up Page';
