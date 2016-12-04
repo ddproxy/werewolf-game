@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../../knex');
 
-router.post('/gameplay', function(req, res) {
+router.post('/gameplay/newgame', function(req, res) {
     console.log(req.body);
     knex('games').insert({
         title: req.body.title,

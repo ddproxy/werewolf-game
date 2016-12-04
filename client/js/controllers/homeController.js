@@ -35,15 +35,17 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.addGame = function(title, id) {
             $scope.view.showForm = false;
             var obj = {
-                    title: title,
-                    id: id,
-                    username: $localStorage.currentUser.username
-                }
-                console.log(obj);
-                // $scope.view.games.push(obj);
+                title: title,
+                id: id,
+                username: $localStorage.currentUser.username
+            }
+            console.log(obj);
+            // $scope.view.games.push(obj);
 
-            $http.post('/api/gameplay/', obj).then(function(response) {
-                console.log(response.data);
+            $http.post('/api/gameplay/newgame', obj).then(function(response) {
+                if (response.data) {
+                    $location.url('/waitingroom/' + id);
+                }
             })
 
         }
