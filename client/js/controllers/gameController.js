@@ -1,12 +1,13 @@
-app.controller('gameController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
-  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
+app.controller('gameController', [
+	'$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
+	function ($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
 
-      $scope.view = {};
-      $scope.message = 'controller is working'
-      $scope.messages = [];
+		$scope.view = {};
+		$scope.message = 'controller is working';
+		$scope.messages = [];
 
-      $scope.view.game = moderatorFactory.gameObject;
+		$scope.view.game = moderatorFactory.gameObject;
 
 
-    }
+	}
 ]);
