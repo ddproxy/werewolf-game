@@ -14,9 +14,14 @@ const path = require('path');
 
 io.on('connection', function(socket) {
     console.log('connected');
+
+    socket.on('disconnect', function() {
+        console.log('disconnected');
+    })
+
     socket.on('joingame', function(gamedata) {
-        console.log("this is the game data: " + gamedata);
-        socket.emit('addToWaitingRoom', gamedata);
+        console.log("I'mma tell you bruh");
+        io.emit('addToWaitingRoom', gamedata);
     })
 });
 

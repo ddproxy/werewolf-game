@@ -1,5 +1,3 @@
-var socket = io();
-
 app.controller('homeController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage',
     function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage) {
         $scope.message = 'controller is booyah'
@@ -8,7 +6,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.view.games;
         $scope.view.showForm = false;
 
-        $http.get('/api/gameplay/opengames').then(function(response){
+        $http.get('/api/gameplay/opengames').then(function(response) {
             $scope.view.games = response.data
         })
 
@@ -38,11 +36,11 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.addGame = function(title, id) {
             $scope.view.showForm = false;
             var obj = {
-                title: title,
-                id: id,
-                username: $localStorage.currentUser.username
-            }
-            // $scope.view.games.push(obj);
+                    title: title,
+                    id: id,
+                    username: $localStorage.currentUser.username
+                }
+                // $scope.view.games.push(obj);
 
             $http.post('/api/gameplay/newgame', obj).then(function(response) {
                 if (response.data) {
