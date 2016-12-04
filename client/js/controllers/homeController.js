@@ -8,7 +8,6 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
 
 
         $scope.view.go = function(num) {
-            console.log(num);
             socket.emit('joingame', {
                 username: $localStorage.currentUser.username,
                 gameid: num
@@ -26,7 +25,6 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
 
-            console.log(text);
 
             $scope.view.randomId = text;
 
