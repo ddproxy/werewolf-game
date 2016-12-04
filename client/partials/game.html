@@ -1,42 +1,51 @@
 <h1>Game page</h1>
 
-<div class="ui stackable grid wholeframe">
-  <div class="row">
-    <div class="four wide column">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, deserunt et dolorum in quae sapiente doloremque provident excepturi, ducimus voluptatibus asperiores cumque consectetur neque numquam a ut laudantium animi sed.</p>
-    </div>
-    <div class="six wide column">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quo repudiandae doloribus illum veritatis, quisquam, laudantium vero vel laborum quasi unde mollitia, doloremque nihil? Quas facere dolorum dolor, quo aperiam.</p>
-    </div>
-    <div class="six wide column">
-      <div class="row">
-        <ul id="messages">
-          <li ng-repeat='message in messages'>{{message}}</li>
-        </ul>
+<div class="ui sixteen column stackable grid wholeframe">
+  <div class="stretched row">
+    <div class="three wide column">
+      <div class="ui segment">
+        <table class="ui internally celled table">
+          <tbody>
+            <tr ng-repeat="(player, value) in view.game">
+              <td>
+                <h4 class="ui image header">
+                  <!-- <img src="/images/avatar2/small/lena.png" class="ui mini rounded image"> -->
+                  <div class="content">
+                    {{player}}
+                  </div>
+                </h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="bottom aligned row">
+    </div>
+    <div class="five wide column">
+      <div class="ui segment">
+        <h2>Game Log:</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quo repudiandae doloribus illum veritatis, quisquam, laudantium vero vel laborum quasi unde mollitia, doloremque nihil? Quas facere dolorum dolor, quo aperiam.</p>
+      </div>
+    </div>
+    <div class="eight wide column wholeframe">
+      <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        <div ng-repeat="message in messages" class="comment">
+          <div class="content">
+            <a class="author">Matt</a>
+            <div class="text">
+              {{message}}
+            </div>
+          </div>
+        </div>
         <form action="">
-          <input ng-model='view.input' id="m" autocomplete="off" />
-          <button ng-click='submit($event)'>Send</button>
+          <div class="field">
+            <input ng-model='view.input' id="m" autocomplete="off"></input>
+          </div>
+          <div class="ui blue labeled submit icon button" ng-click='submit()'>
+            <i class="icon edit"></i> Send
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-<!-- <div class="chat">
-
-  <ul id="messages">
-    <li ng-repeat='message in messages'>{{message}}</li>
-  </ul>
-  <form action="">
-    <input ng-model='view.input' id="m" autocomplete="off" />
-    <button ng-click='submit()'>Send</button>
-  </form>
-
-</div> -->
