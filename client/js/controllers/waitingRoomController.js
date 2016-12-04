@@ -2,11 +2,10 @@ app.controller('waitingRoomController',
 	['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$routeParams',
 	 function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
-
-		//  SocketFactory.onAddToWaitingRoom(function(data) {
-
-		// 	 $scope.view.users = data;
-		//  });
+		 socket.on('runDigestLoop', function(){
+			 console.log('ALLRIGHT....here is that new shit!');
+			 $scope.$digest();
+		 })
 
 		 $scope.view = {};
 

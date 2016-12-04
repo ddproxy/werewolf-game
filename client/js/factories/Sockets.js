@@ -5,6 +5,7 @@ app.factory('SocketFactory', function($http, $localStorage) {
 
     socket.on('addToWaitingRoom', function(data) {
         gameList.push(data);
+        socket.emit('update');
     })
 
     obj.getGameList = function(callback) {

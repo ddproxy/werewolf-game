@@ -5,7 +5,9 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.view = {};
         $scope.view.games;
         $scope.gotoroom = function(roomNumber) {
+
             $location.url('/waitingroom/' + roomNumber);
+
         }
         $scope.view.showForm = false;
 

@@ -23,6 +23,11 @@ io.on('connection', function(socket) {
         console.log("I'mma tell you bruh");
         io.emit('addToWaitingRoom', gamedata);
     })
+
+    socket.on('update', function(){
+      console.log("oh you want that new shit?");
+      io.emit('runDigestLoop');
+    })
 });
 
 
