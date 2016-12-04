@@ -3,6 +3,7 @@ var socket = io();
 app.controller('gameController', ['$scope', '$http', '$location', '$window', 'moderatorFactory',
   function($scope, $http, $location, $window, moderatorFactory) {
 
+      $scope.view = {};
       $scope.message = 'controller is working'
       $scope.messages = [];
 
@@ -11,6 +12,8 @@ app.controller('gameController', ['$scope', '$http', '$location', '$window', 'mo
         $scope.view.input = '';
         return false;
       }
+      console.log(moderatorFactory.gameObject);
+      $scope.view.game = moderatorFactory.gameObject;
 
       socket.on('chat message', function(msg){
         console.log(msg, 'msg from socket in controller');
@@ -18,7 +21,6 @@ app.controller('gameController', ['$scope', '$http', '$location', '$window', 'mo
         console.log($scope.messages, 'scope.messages');
       });
 
-      console.log(moderatorFactory.gameObject);
 
     }
 ]);
