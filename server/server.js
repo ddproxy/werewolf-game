@@ -24,12 +24,13 @@ io.on('connection', function(socket) {
     socket.on('authenticated', function(token) {
         if (jwt.verify(token, 'secret', function(err, decoded) {
                 if (decoded) {
-                  console.log("auth");
+                    console.log("auth");
                     currentUser = {
                         username: decoded.username,
                         socket: socket
                     }
                     usersOnline.push(currentUser);
+                    console.log(usersOnline);
 
 
                     socket.on('joingame', function(roomNumber) {
@@ -38,11 +39,16 @@ io.on('connection', function(socket) {
                             usersPlayingList.push(currentUser)
                         }
 
+                        //list of users in the same room as the new person joining
                         var needsToKnow = _.filter(usersPlayingList, function(user) {
-                          return user.room == roomNumber;
+                            return user.room == roomNumber;
                         });
 
-                        needsToKnow.map(user => { user.socket.emit(listOfUsersInRoom) });
+                        //loop through the need to know list and emit to each of the addtowaiting list
+                        needsToKnow.map(function(user) {
+                            user.socket.emit('addToWaitingRoom', needsToKnow)
+                        });
+
 
 
 
@@ -108,6 +114,17 @@ app.get('/', function(req, res) {
 
 app.get('/api', function(req, res) {
     res.send("I'm an api");
+})
+
+app.get('/api/usersOnline', function(req, res) {
+    var users = usersOnline.map(function(user) {
+        return {
+            user: user.username,
+            game: user.room
+        };
+    })
+    console.log(users);
+    res.json(users)
 })
 
 

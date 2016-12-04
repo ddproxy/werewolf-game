@@ -6,11 +6,7 @@ const router = express.Router();
 const knex = require('../../knex');
 var bcrypt = require('bcrypt-as-promised');
 
-router.get('/users', function(req, res) {
-    knex('users').then((users) => {
-        res.json(users);
-    })
-})
+
 
 router.post('/users', function(req, res) {
     bcrypt.hash(req.body.password, 10).then((hashpw) => {

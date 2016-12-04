@@ -24,23 +24,19 @@ router.post('/token', function(req, res) {
                 })
             })
             .catch(bcrypt.MISMATCH_ERROR, function(data) {
-              console.log('bad password');
                 res.sendStatus(501);
             })
             .catch(function(data) {
-              console.log('bad call');
                 res.sendStatus(501);
             });
     });
 });
 
 router.get('/me', function(req, res) {
-  console.log(req.headers);
     jwt.verify(req.headers.authorization, 'secret', function(err, decoded) {
       if (decoded) {
         res.send(decoded)
       } else {
-        console.log(err);
         res.sendStatus(501)
       }
     })
