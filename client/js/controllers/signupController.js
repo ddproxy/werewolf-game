@@ -4,9 +4,6 @@ app.controller('signupController', ['$scope', '$http', '$location', '$window', '
     $scope.view = {};
     $scope.view.test = 'Sign Up Page';
     $scope.newUser = {};
-    $scope.newUser.username = "midastouchprd";
-    $scope.newUser.email = "midastouchproductions@gmail.com";
-    $scope.newUser.password = "Dreamers512";
 
     $scope.submitSignup = function(obj, callback) {
         $http.post('/api/users', obj).then(function successCallback(response) {

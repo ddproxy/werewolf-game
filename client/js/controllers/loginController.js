@@ -5,8 +5,6 @@ app.controller('loginController', ['$scope', '$http', '$location', '$window', 'm
     $scope.view = {};
     $scope.view.test = 'Login Page';
     $scope.login = {};
-    $scope.login.username = "midastouchprd";
-    $scope.login.password = "Dreamers512";
 
     $scope.getToken = function(callback) {
         AuthFactory.Login($scope.login.username, $scope.login.password, function(valid) {

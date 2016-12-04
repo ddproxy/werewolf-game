@@ -2,14 +2,16 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
     var obj = {};
     var gameList = [];
 
+    var cb = false;
 
-    socket.on('addToWaitingRoom', function(data) {
+    socket.on('refreshWaitingRoom', function(data) {
         gameList = data;
-        socket.emit('update');
+        cb(gameList);
     })
 
     obj.getGameList = function(callback) {
         console.log(gameList);
+        cb = callback;
         callback(gameList);
     }
 

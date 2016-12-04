@@ -2,10 +2,10 @@ app.controller('waitingRoomController',
 	['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$routeParams',
 	 function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
-		 socket.on('runDigestLoop-', function(){
-			 console.log('ALLRIGHT....here is that new shit!');
-			 $scope.$digest();
-		 })
+		//  socket.on('runDigestLoop', function(){
+		// 	 console.log('ALLRIGHT....here is that new shit!');
+		// 	 $scope.$digest();
+		//  })
 
 		 $scope.view = {};
 

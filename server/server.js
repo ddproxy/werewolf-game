@@ -2,63 +2,66 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var bodyParser = require('body-parser');
-var port = process.env.PORT || 3000;
-var knex = require('../knex');
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
+const knex = require('../knex');
 const path = require('path');
-var _ = require('lodash');
+const _ = require('lodash');
 const jwt = require('jsonwebtoken');
-var usersOnline = [];
+let usersOnline = [];
 
 //open page
 io.on('connection', function(socket) {
-    let usersPlayingList = []
+  console.log("connected");
     let currentUser = false;
-    console.log('connected');
 
     //on login
     socket.on('authenticated', function(token) {
         if (jwt.verify(token, 'secret', function(err, decoded) {
                 if (decoded) {
-                    console.log("auth");
+                  console.log("auth");
                     currentUser = {
                         username: decoded.username,
-                        socket: socket
+                        socket: socket,
+                        room: undefined
                     }
                     usersOnline.push(currentUser);
-                    console.log(usersOnline);
 
 
                     socket.on('joingame', function(roomNumber) {
-                        if (!_.find(usersPlayingList, currentUser)) {
+                        //if no room number - then add them to room
+                        if (_.find(usersOnline, (user) => {
+                                return (user.username == currentUser.username) && (user.room == undefined);
+                            })) {
                             currentUser.room = roomNumber;
-                            usersPlayingList.push({
-                              user: currentUser.username,
-                              room: currentUser.room
-                            })
                         }
 
                         //list of users in the same room as the new person joining
-                        var needsToKnow = _.filter(usersPlayingList, function(user) {
+                        var needsToKnow = _.filter(usersOnline, function(user) {
                             return user.room == roomNumber;
                         });
 
                         //loop through the need to know list and emit to each of the addtowaiting list
-                        needsToKnow.map(function(user) {
-
-                            user.socket.emit('addToWaitingRoom', usersPlayingList)
+                        var updatedArrayList = needsToKnow.map((userToKnow) => {
+                            return _.omitBy(userToKnow, (key, value) => {
+                                return key !== 'socket';
+                            })
                         });
-                    })
 
-                    socket.on('update', function() {
-                        console.log("oh you want that new shit?");
-                        io.emit('runDigestLoop');
-                    })
+                        console.log(updatedArrayList);
 
+                        needsToKnow.map(function(user) {
+                            user.socket.emit('refreshWaitingRoom', updatedArrayList);
+                        })
+                    });
+
+                    // socket.on('update', function() {
+                    //     io.emit('runDigestLoop');
+                    // })
 
                 }
             }));
