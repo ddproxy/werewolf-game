@@ -10,7 +10,7 @@ app.factory('moderatorFactory', ['$location', function ($location) {
 			var roles = ["citizen", "citizen", "citizen", "werewolf", "werewolf", "witchdoctor", "hunter",
 						 "fortuneteller"];
 
-			if (this.userList.length < 8) {
+			if (this.userList.length < 1) {
 				console.log("Wait till the room is full");
 			} else {
 				for (i = 0; i <= 7; i++) {

@@ -17,10 +17,7 @@ app.controller('homeController', [
 
 
 		$scope.view.go = function (num, callback) {
-			socket.emit('joingame', {
-				username: $localStorage.currentUser.username,
-				gameid: num
-			});
+			socket.emit('joingame', num)
 			callback(num);
 		};
 
