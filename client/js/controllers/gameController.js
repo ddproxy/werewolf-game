@@ -1,22 +1,8 @@
-var socket = io();
-
-app.controller('gameController', ['$scope', '$http', '$location', '$window', 'moderatorFactory',
-  function($scope, $http, $location, $window, moderatorFactory) {
+app.controller('gameController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
 
       $scope.message = 'controller is working'
       $scope.messages = [];
-
-      $scope.submit = function () {
-        socket.emit('chat message', $scope.view.input);
-        $scope.view.input = '';
-        return false;
-      }
-
-      socket.on('chat message', function(msg){
-        console.log(msg, 'msg from socket in controller');
-        $scope.messages.push(msg)
-        console.log($scope.messages, 'scope.messages');
-      });
 
       console.log(moderatorFactory.gameObject);
 

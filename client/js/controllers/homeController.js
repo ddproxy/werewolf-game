@@ -1,5 +1,5 @@
-app.controller('homeController', ['$scope', '$http', '$location', '$window',
-    function($scope, $http, $location, $window) {
+app.controller('homeController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
         $scope.message = 'controller is booyah'
 
         $scope.view = {};

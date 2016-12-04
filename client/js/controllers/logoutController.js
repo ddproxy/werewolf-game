@@ -1,5 +1,6 @@
-app.controller('logoutController', ['$scope', '$http', '$location', 'AuthFactory', '$localStorage', function($scope, $http, $location, AuthFactory, $localStorage) {
+app.controller('logoutController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
 
     $scope.logout = AuthFactory.Logout;
-    
+
 }]);

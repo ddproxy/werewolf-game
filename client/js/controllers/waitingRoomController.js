@@ -1,4 +1,5 @@
-app.controller('waitingRoomController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', function ($scope, $http, $location, $window, moderatorFactory) {
+app.controller('waitingRoomController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory',
+  function($scope, $http, $location, $window, moderatorFactory, SocketFactory) {
     $scope.message = "This is the waiting room";
 
     $scope.view = {};
