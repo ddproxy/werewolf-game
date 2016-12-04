@@ -3,7 +3,9 @@ app.controller('waitingRoomController',
 	 function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
 		 SocketFactory.onAddToWaitingRoom(function(data) {
-			 $scope.view.users = data;
+       $apply(function(){
+         $scope.view.users = data;
+       })
 		 });
 
 		 $scope.view = {};
