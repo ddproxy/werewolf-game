@@ -17,6 +17,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
         }
 
         $scope.createGame = function() {
+            $localStorage.currentUser.role = "moderator";
             $scope.view.showForm = true;
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -33,15 +34,16 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
 
         $scope.addGame = function(title, id) {
             $scope.view.showForm = false;
-            var obj= {
-              title: title,
-              id: id,
-            }
-            // console.log(obj);
-            // $scope.view.games.push(obj);
+            var obj = {
+                    title: title,
+                    id: id,
+                    username: $localStorage.currentUser.username
+                }
+                console.log(obj);
+                // $scope.view.games.push(obj);
 
-            $http.post('/api/gameplay/', obj).then(function(response){
-              console.log(response.data);
+            $http.post('/api/gameplay/', obj).then(function(response) {
+                console.log(response.data);
             })
 
         }
