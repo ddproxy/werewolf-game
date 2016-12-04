@@ -4,19 +4,23 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
 
         $scope.view = {};
         $scope.view.games;
+        $scope.gotoroom = function(roomNumber) {
+            $location.url('/waitingroom/' + roomNumber);
+        }
         $scope.view.showForm = false;
+
 
         $http.get('/api/gameplay/opengames').then(function(response) {
             $scope.view.games = response.data
         })
 
 
-        $scope.view.go = function(num) {
+        $scope.view.go = function(num, callback) {
             socket.emit('joingame', {
                 username: $localStorage.currentUser.username,
                 gameid: num
             })
-            $location.url('/waitingroom/' + num);
+            callback(num);
         }
 
         $scope.createGame = function() {
@@ -52,3 +56,8 @@ app.controller('homeController', ['$scope', '$http', '$location', '$window', 'mo
 
     }
 ]);
+
+
+function GoToRoom(roomNumber) {
+    $location.url('/waitingroom/' + roomNumber);
+}
