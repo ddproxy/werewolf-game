@@ -9,11 +9,11 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: 'partials/home.html',
       controller: 'homeController'
     })
-    .when('/waitingroom', {
+    .when('/waitingroom/:gameid', {
       templateUrl: 'partials/waitingroom.html',
       controller: 'waitingRoomController',
     })
-    .when('/game', {
+    .when('/game/:gameid', {
         templateUrl: 'partials/game.html',
         controller: 'gameController',
     })

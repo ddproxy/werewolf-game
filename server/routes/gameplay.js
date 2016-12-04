@@ -5,8 +5,8 @@
  const router = express.Router();
 const knex = require('../../knex');
 
- router.get('/gameplay', function(req, res){
-   res.send("gameplay api");
+ router.get('/gameplay/:gameid', function(req, res){
+   //
  })
 
 

@@ -3,9 +3,23 @@
     <h1 id="welcome">Choose a game or join your friends!</h1>
 
     <div class="">
-        <button class="huge ui button" ng-click="view.go()">
+        <button class="huge ui button" ng-click="createGame()">
           Create New Game
         </button>
+    </div>
+
+    <div ng-show="view.showForm" class="form-wrapper">
+        <form class="ui centered form">
+
+            <label>Game Title:</label>
+            <input type="text" name="gameTitle" ng-model="view.gameInputs">
+
+
+            <button class="huge ui button" ng-click="addGame(view.gameInputs, view.randomId)">
+              Submit Game
+            </button>
+
+        </form>
     </div>
 
     <div class="ui action input">
@@ -16,9 +30,7 @@
 
     <div class="ui link list">
         <div class="active item">Open Games:</div>
-        <a class="item" ng-click="view.go(1)">Game 1</a>
-        <a class="item" ng-click="view.go(2)">Game 2</a>
-        <a class="item" ng-click="view.go(3)">Game 3</a>
+        <a ng-repeat='game in view.games' class="item" ng-click="view.go(game.id)">Game: {{game.title}}</a>
     </div>
 
 

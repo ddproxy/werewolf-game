@@ -14,6 +14,7 @@ const path = require('path');
 
 io.on('connection', function(socket) {
   socket.on('joingame', function(gamedata){
+    //send to game table with id and username
     console.log(gamedata);
   })
 });
