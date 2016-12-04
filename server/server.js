@@ -36,7 +36,10 @@ io.on('connection', function(socket) {
                     socket.on('joingame', function(roomNumber) {
                         if (!_.find(usersPlayingList, currentUser)) {
                             currentUser.room = roomNumber;
-                            usersPlayingList.push(currentUser)
+                            usersPlayingList.push({
+                              user: currentUser.username
+                              room: currentUser.room
+                            })
                         }
 
                         //list of users in the same room as the new person joining
@@ -46,42 +49,34 @@ io.on('connection', function(socket) {
 
                         //loop through the need to know list and emit to each of the addtowaiting list
                         needsToKnow.map(function(user) {
-                            user.socket.emit('addToWaitingRoom', needsToKnow)
+
+                            user.socket.emit('addToWaitingRoom', usersPlayingList)
                         });
-
-
-
-
-
-
-
-
-
-                        // io.emit('addToWaitingRoom', _.filter(usersPlayingList, (user) => {
-                        //     return user.gameid == gamedata.gameid;
-                        // }));
                     })
 
                     socket.on('update', function() {
                         console.log("oh you want that new shit?");
                         io.emit('runDigestLoop');
                     })
+
+
                 }
-            }))
-
-
-
-            socket.on('disconnect', function() {
-            if (currentUser) {
-                _.remove(usersOnline, currentUser)
-                currentUser = false;
-            }
-            console.log('disconnected');
-        })
-
-
+            }));
     });
+
+
+
+    socket.on('disconnect', function() {
+        console.log('disconnected');
+        if (currentUser) {
+            _.remove(usersOnline, currentUser)
+            currentUser = false;
+        }
+    })
+
+
 });
+
 
 
 // Middleware
