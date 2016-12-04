@@ -37,7 +37,7 @@ io.on('connection', function(socket) {
                         if (!_.find(usersPlayingList, currentUser)) {
                             currentUser.room = roomNumber;
                             usersPlayingList.push({
-                              user: currentUser.username
+                              user: currentUser.username,
                               room: currentUser.room
                             })
                         }
