@@ -1,7 +1,7 @@
 app.controller('waitingRoomController', ['$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$routeParams',
   function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
-
+    SocketFactory.jonDopeFunction;
 
     $scope.view = {};
 
