@@ -2,15 +2,6 @@ app.controller('homeController', [
     '$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage', 'AuthFactory',
     function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage, AuthFactory) {
 
-      if ($localStorage.currentUser) {
-          socket.emit('authenticated?', $localStorage.currentUser.token);
-          socket.on('gtfo', function() {
-              AuthFactory.Logout();
-          })
-      } else {
-          AuthFactory.Logout();
-      }
-
 
         $scope.message = 'controller is booyah'
 
@@ -64,6 +55,8 @@ app.controller('homeController', [
             })
 
         }
+
+        $scope.logout = AuthFactory.Logout;
     }
 ]);
 

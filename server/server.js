@@ -16,24 +16,27 @@ let usersOnline = [];
 
 //open page
 io.on('connection', function(socket) {
-    ("connected");
+    console.log("connected");
     let currentUser = false;
+    let oldRoom;
 
     //on login
     socket.on('authenticated?', function(token) {
         jwt.verify(token, 'secret', function(err, decoded) {
             if (err) {
-              ('naaawwww son');
               socket.emit('gtfo');
             }
             else if (decoded) {
-                ("auth");
                 currentUser = {
                     username: decoded.username,
                     socket: socket,
                     room: undefined
                 };
-                usersOnline.push(currentUser);
+              //   if (!_.find(usersOnline, (user) => {
+              //     return (user.username !== currentUser.username)
+              // })) {
+              // }
+              usersOnline.push(currentUser);
             }
         });
 
@@ -41,45 +44,59 @@ io.on('connection', function(socket) {
         socket.on('joingame', function(roomNumber) {
             //if no room number - then add them to room
             if (_.find(usersOnline, (user) => {
-                    return (user.username == currentUser.username) && (user.room == undefined);
+                    return (user.username == currentUser.username) && (user.room !== roomNumber);
                 })) {
-
+                if (currentUser.room !== undefined) {
+                  oldRoom = currentUser.room;
+                }
                 currentUser.room = roomNumber;
-                ("added " + currentUser.username + " to " + currentUser.room);
                 usersOnline = _.uniq(usersOnline);
             }
 
             //list of users in the same room as the new person joining
-            var needsToKnow = _.filter(usersOnline, function(user) {
-                return user.room == roomNumber;
+            var gettingAdded = _.filter(usersOnline, function(user) {
+                return (user.room == roomNumber);
+            });
+
+            var gettingRemoved = _.filter(usersOnline, function(user) {
+                return (user.room == oldRoom);
             });
 
 
+
+
+
             //loop through the need to know list and emit to each of the addtowaiting list
-            var updatedArrayList = needsToKnow.map(function(user) {
+            var updatedGettingAdded = gettingAdded.map(function(user) {
                 return {
                     username: user.username,
                     room: user.room
                 }
             });
 
-            ("here is the list without sockets");
-            (updatedArrayList);
+            var updatedGettingRemoved = gettingRemoved.map(function(user) {
+                return {
+                    username: user.username,
+                    room: user.room
+                }
+            });
 
-            needsToKnow.map(function(user) {
-                ("sending signal to " + user.username);
-                user.socket.emit('refreshWaitingRoom', updatedArrayList);
+
+            gettingAdded.map(function(user) {
+                user.socket.emit('refreshWaitingRoom', updatedGettingAdded);
+            })
+            gettingRemoved.map(function(user) {
+                user.socket.emit('refreshWaitingRoom', updatedGettingRemoved);
             })
         });
 
         socket.on('update', function(){
-          ("oh you want that new shit?");
           io.emit('runDigest');
         })
     });
 
     socket.on('disconnect', function() {
-        ('disconnected');
+        console.log('disconnected');
         if (currentUser) {
             _.remove(usersOnline, currentUser);
             currentUser = false;
