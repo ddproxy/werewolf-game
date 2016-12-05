@@ -1,3 +1,7 @@
+.container  {
+  margin: 12vmin;
+}
+
 .form-wrapper {
     margin-left: 18vw;
     margin-right: 18vw;
@@ -21,4 +25,12 @@
 
 .wholeframe {
   height: 85vh;
+}
+
+#login {
+  margin-top: 10vh;
+}
+
+#signup {
+  margin-top: 10vh;
 }

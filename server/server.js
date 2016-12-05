@@ -16,14 +16,18 @@ let usersOnline = [];
 
 //open page
 io.on('connection', function(socket) {
-    console.log("connected");
+    ("connected");
     let currentUser = false;
 
     //on login
-    socket.on('authenticated', function(token) {
+    socket.on('authenticated?', function(token) {
         jwt.verify(token, 'secret', function(err, decoded) {
-            if (decoded) {
-                console.log("auth");
+            if (err) {
+              ('naaawwww son');
+              socket.emit('gtfo');
+            }
+            else if (decoded) {
+                ("auth");
                 currentUser = {
                     username: decoded.username,
                     socket: socket,
@@ -41,7 +45,7 @@ io.on('connection', function(socket) {
                 })) {
 
                 currentUser.room = roomNumber;
-                console.log("added " + currentUser.username + " to " + currentUser.room);
+                ("added " + currentUser.username + " to " + currentUser.room);
                 usersOnline = _.uniq(usersOnline);
             }
 
@@ -59,23 +63,23 @@ io.on('connection', function(socket) {
                 }
             });
 
-            console.log("here is the list without sockets");
-            console.log(updatedArrayList);
+            ("here is the list without sockets");
+            (updatedArrayList);
 
             needsToKnow.map(function(user) {
-                console.log("sending signal to " + user.username);
+                ("sending signal to " + user.username);
                 user.socket.emit('refreshWaitingRoom', updatedArrayList);
             })
         });
 
         socket.on('update', function(){
-          console.log("oh you want that new shit?");
+          ("oh you want that new shit?");
           io.emit('runDigest');
         })
     });
 
     socket.on('disconnect', function() {
-        console.log('disconnected');
+        ('disconnected');
         if (currentUser) {
             _.remove(usersOnline, currentUser);
             currentUser = false;
@@ -121,12 +125,12 @@ app.get('/api/usersOnline', function(req, res) {
             game: user.room
         };
     });
-    console.log(users);
+    (users);
     res.json(users)
 });
 
 
 // Server Listener
 http.listen(port, function() {
-    console.log('listening on port: ' + port);
+    ('listening on port: ' + port);
 });

@@ -1,10 +1,11 @@
 app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
     var obj = {};
     var gameList = [];
+    ("HAHAHAHA");
 
     socket.on('refreshWaitingRoom', function(data) {
-        console.log("refreshing the waiting room");
-        console.log(data);
+        ("refreshing the waiting room");
+        (data);
         gameList = data;
         socket.emit('update');
     });

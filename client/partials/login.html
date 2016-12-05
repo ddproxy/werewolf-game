@@ -1,21 +1,33 @@
-<h1 class="ui center aligned header">Log In</h1>
+<div class="container">
+
+    <h1 class="ui center aligned header">Log In</h1>
 
 
 
 
-<div class="form-wrapper">
-    <form class="ui centered form">
+    <div class="form-wrapper">
+        <form class="ui centered form">
 
-        <label>Email Address:</label>
-        <input type="text" name="username" ng-model="login.username">
+            <label>Username:</label>
+            <input type="text" name="username" ng-model="login.username">
 
-        <label>Password:</label>
-        <input type="password" name="password" ng-model="login.password">
-
-
-        <button id="signup-submit" class='fluid ui blue button' type="button" ng-click='getToken(sendAlert)'>Submit</button>
+            <label>Password:</label>
+            <input type="password" name="password" ng-model="login.password">
 
 
+            <button id="signup-submit" class='fluid ui blue button' type="button" ng-click='getToken(sendAlert)'>Submit</button>
 
-    </form>
+
+        </form>
+    </div>
+
+    <div class="ui center aligned equal width grid" id="signup">
+
+        <div class="section">
+            <a href="/#/signup" class="item"> Signup?
+  </a>
+
+        </div>
+
+    </div>
 </div>

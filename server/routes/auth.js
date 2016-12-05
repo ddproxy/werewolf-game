@@ -33,11 +33,12 @@ router.post('/token', function(req, res) {
 });
 
 router.get('/me', function(req, res) {
+  (req.headers.authorization);
     jwt.verify(req.headers.authorization, 'secret', function(err, decoded) {
       if (decoded) {
         res.send(decoded)
       } else {
-        res.sendStatus(501)
+        res.sendStatus(401)
       }
     })
 

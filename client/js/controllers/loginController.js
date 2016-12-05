@@ -6,6 +6,10 @@ app.controller('loginController', ['$scope', '$http', '$location', '$window', 'm
     $scope.view.test = 'Login Page';
     $scope.login = {};
 
+    $scope.newUser = function(){
+      $location.url('/signup');
+    }
+
     $scope.getToken = function(callback) {
         AuthFactory.Login($scope.login.username, $scope.login.password, function(valid) {
             if (valid) {

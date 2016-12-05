@@ -11,7 +11,7 @@ app.factory('moderatorFactory', ['$location', function ($location) {
 						 "fortuneteller"];
 
 			if (this.userList.length < 1) {
-				console.log("Wait till the room is full");
+				("Wait till the room is full");
 			} else {
 				for (i = 0; i <= 7; i++) {
 					this.gameObject[this.userList[i]] = new Player(roles[i]);
@@ -19,7 +19,7 @@ app.factory('moderatorFactory', ['$location', function ($location) {
 						this.gameObject[this.userList[i]].usedSave = false;
 					}
 				}
-				console.log("assigning roles");
+				("assigning roles");
 				$location.url('/game');
 			}
 

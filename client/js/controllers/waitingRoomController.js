@@ -3,7 +3,7 @@ app.controller('waitingRoomController',
 	 function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $routeParams) {
 
 		 socket.on('runDigest', function(){
-			 console.log('ALLRIGHT....here is that new shit!');
+			 ('ALLRIGHT....here is that new shit!');
 			 SocketFactory.getGameList(function(gamelist){
 				 $scope.view.users = gamelist;
 				 $scope.view.userCount = $scope.view.users.length;

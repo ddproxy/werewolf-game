@@ -1,58 +1,73 @@
 app.controller('homeController', [
-	'$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage',
-	function ($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage) {
-		$scope.message = 'controller is booyah'
+    '$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage', 'AuthFactory',
+    function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage, AuthFactory) {
 
-		$scope.view = {};
-		$scope.view.games;
-		$scope.gotoroom = function (roomNumber) {
-			$location.url('/waitingroom/' + roomNumber);
-
-		};
-		$scope.view.showForm = false;
-
-		$http.get('/api/gameplay/opengames').then(function (response) {
-			$scope.view.games = response.data;
-		});
+      if ($localStorage.currentUser) {
+          socket.emit('authenticated?', $localStorage.currentUser.token);
+          socket.on('gtfo', function() {
+              AuthFactory.Logout();
+          })
+      } else {
+          AuthFactory.Logout();
+      }
 
 
-		$scope.view.go = function (num, callback) {
-			socket.emit('joingame', num)
-			callback(num);
-		};
+        $scope.message = 'controller is booyah'
 
-		$scope.createGame = function () {
-			$localStorage.currentUser.role = "moderator";
-			$scope.view.showForm = true;
-			var text = "";
-			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        $scope.view = {};
+        $scope.view.games;
+        $scope.gotoroom = function(roomNumber) {
+            $location.url('/waitingroom/' + roomNumber);
 
-			for (var i = 0; i < 5; i++) {
-				text += possible.charAt(Math.floor(Math.random() * possible.length));
-			}
+        };
+        $scope.view.showForm = false;
 
-			$scope.view.randomId = text;
-		};
+        $http.get('/api/gameplay/opengames').then(function(response) {
+            $scope.view.games = response.data;
+        });
 
-		$scope.addGame = function (title, id) {
-			$scope.view.showForm = false;
-			var obj = {
-				title: title,
-				id: id,
-				username: $localStorage.currentUser.username
-			};
-			// $scope.view.games.push(obj);
 
-			$http.post('/api/gameplay/newgame', obj).then(function (response) {
-				if (response.data) {
-					$location.url('/waitingroom/' + id);
-				}
-			})
-		}
-	}
+        $scope.view.go = function(num, callback) {
+            socket.emit('joingame', num)
+            callback(num);
+        };
+
+        $scope.createGame = function() {
+            $localStorage.currentUser.role = "moderator";
+            $scope.view.showForm = true;
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 5; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+
+            $scope.view.randomId = text;
+        };
+
+        $scope.addGame = function(title, id) {
+            ('adding a game');
+            $scope.view.showForm = false;
+            $http.get('/api/me').then(function(response) {
+              (response.data);
+                var obj = {
+                    title: title,
+                    id: id,
+                    username: response.data.username
+                };
+
+                $http.post('/api/gameplay/newgame', obj).then(function(response) {
+                    if (response.data) {
+                        $location.url('/waitingroom/' + id);
+                    }
+                })
+            })
+
+        }
+    }
 ]);
 
 
-function GoToRoom (roomNumber) {
-	$location.url('/waitingroom/' + roomNumber);
+function GoToRoom(roomNumber) {
+    $location.url('/waitingroom/' + roomNumber);
 }

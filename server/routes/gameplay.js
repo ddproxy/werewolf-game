@@ -15,6 +15,7 @@ router.post('/gameplay/newgame', function(req, res) {
         }).then(function(user) {
             res.send(true);
         }).catch(function(err) {
+            (err);
             res.send(false);
         })
     })
