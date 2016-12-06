@@ -1,4 +1,4 @@
-app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
+app.factory('SocketFactory', function($http, $localStorage, $routeParams, $location) {
     var obj = {};
     var gameList = [];
 
@@ -7,11 +7,6 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
         gameList = data;
         socket.emit('update');
     });
-
-    socket.on('goToRoom', function(room){
-      console.log('someone in your room went to the room');
-      console.log(room);
-    })
 
 
     obj.getGameList = function(callback) {
