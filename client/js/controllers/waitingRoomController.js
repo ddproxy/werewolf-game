@@ -12,10 +12,6 @@ app.controller('waitingRoomController',
 			 $scope.$apply();
 		 })
 
-		 socket.on('goToRoom', function(room){
-			 console.log("ok I'll go to " + room);
-			 $location.url('/game/' + room)
-		 })
 
 		 $scope.view = {};
 
@@ -25,8 +21,10 @@ app.controller('waitingRoomController',
 		 //Update the moderatorFactory everytime a new user is pushed into the list
 
 		 $scope.view.gameStart = function () {
-			 moderatorFactory.fillUserList($scope.view.users);
-			 moderatorFactory.start($routeParams.gameid);
+			 moderatorFactory.fillUserList($scope.view.users, function(){
+				 moderatorFactory.start($routeParams.gameid);
+			 });
+			 socket.emit('gamestart',$routeParams.gameid)
 		 }
 
 		 $scope.rightUser = function(num){

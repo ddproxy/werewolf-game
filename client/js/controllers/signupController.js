@@ -5,10 +5,6 @@ app.controller('signupController', ['$scope', '$http', '$location', '$window', '
     $scope.view.test = 'Sign Up Page';
     $scope.newUser = {};
 
-    $scope.newUser = function(){
-      $location.url('/login');
-    }
-
     $scope.submitSignup = function(obj, callback) {
         $http.post('/api/users', obj).then(function successCallback(response) {
             AuthFactory.Login($scope.newUser.username, $scope.newUser.password, function(valid) {

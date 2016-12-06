@@ -1,13 +1,16 @@
 app.factory('moderatorFactory', ['$location', function($location) {
     var Moderator = {};
 
-		var userList = [];
+		var playerList = [];
 
-    Moderator.gameObject = {};
+    Moderator.fillUserList = function(array, callback) {
+        playerList = array;
+        callback()
+    }
 
-    Moderator.fillUserList = function(array) {
-        userList = array;
-        console.log(userList);
+    Moderator.getGameObject = function() {
+        return gameObject;
+        console.log(gameObject);
     }
 
     Moderator.start = function(gameid) {
@@ -16,15 +19,10 @@ app.factory('moderatorFactory', ['$location', function($location) {
             "fortuneteller"
         ];
 
-        for (i = 0; i <= 7; i++) {
-            Moderator.gameObject[userList[i]] = new Player(roles[i]);
-            if (roles[i] === "witchdoctor") {
-                Moderator.gameObject[userList[i]].usedSave = false;
-            }
-        }
+        $location.url('/game/' + gameid);
 
-        socket.emit('startgame', gameid);
-        console.log("sending signal to start game");
+
+
     }
 
 

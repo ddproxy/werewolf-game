@@ -6,7 +6,7 @@ app.controller('gameController', [
 		$scope.message = 'controller is working';
 		$scope.messages = [];
 
-		$scope.view.game = moderatorFactory.gameObject;
+		$scope.game = moderatorFactory.getGameObject();
 
 
 	}

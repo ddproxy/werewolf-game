@@ -16,7 +16,6 @@ let usersOnline = [];
 
 //open page
 io.on('connection', function(socket) {
-    console.log("connected");
     let currentUser = false;
     let oldRoom;
 
@@ -25,40 +24,30 @@ io.on('connection', function(socket) {
         jwt.verify(token, 'secret', function(err, decoded) {
             if (err) {
                 socket.emit('gtfo');
-                console.log(err);
             } else if (decoded) {
                 currentUser = {
                     username: decoded.username,
                     socket: socket,
-                    room: undefined
+                    room: undefined,
+                    role: undefined,
+                    awake: true,
+                    alive: true
                 };
 
 
                 if (usersOnline.length < 1) {
 
-                    console.log('auth for: ' + currentUser.username);
-                    console.log('-------------');
                     usersOnline.push(currentUser);
-                    console.log(currentUser.username + " is now in users online");
-                    console.log('-------------');
                 }
 
                 for (var i = 0; i < usersOnline.length; i++) {
-                    console.log('-------------');
-                    console.log("user:" + i);
-                    console.log(usersOnline[i].username);
-                    console.log('-------------');
                     if (usersOnline[i].username == currentUser.username) {
-                        console.log("removed: " + usersOnline[i].username);
                         _.remove(usersOnline, usersOnline[i]);
                     }
                 }
 
 
-                console.log('-------------');
                 usersOnline.push(currentUser);
-                console.log(currentUser.username + " is now in users online");
-                console.log('-------------');
             }
 
         });
@@ -114,12 +103,11 @@ io.on('connection', function(socket) {
             })
         });
 
-        socket.on('startgame', function(roomNumber) {
+        socket.on('gamestart', function(roomNumber) {
             var players = _.filter(usersOnline, function(user) {
                 return (user.room == roomNumber);
             });
             players.map(function(user){
-              console.log('sending ' + user.username + 'the signal to go the room');
               user.socket.emit('goToRoom', user.room)
             })
         })
@@ -130,14 +118,12 @@ io.on('connection', function(socket) {
     });
 
     socket.on('disconnect', function() {
-        console.log('disconnected');
         if (currentUser) {
             _.remove(usersOnline, currentUser);
             currentUser = false;
         }
     })
     socket.on('logout', function() {
-        console.log('logged out');
         if (currentUser) {
             _.remove(usersOnline, currentUser);
             currentUser = false;

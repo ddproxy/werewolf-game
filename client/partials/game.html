@@ -6,12 +6,13 @@
       <div class="ui segment">
         <table class="ui internally celled table">
           <tbody>
-            <tr ng-repeat="(player, value) in view.game">
+            <tr ng-repeat="player in game">
               <td>
                 <h4 class="ui image header">
                   <!-- <img src="/images/avatar2/small/lena.png" class="ui mini rounded image"> -->
                   <div class="content">
-                    {{player.username}}
+                    Player:
+                    {{player.role}}
                   </div>
                 </h4>
               </td>
