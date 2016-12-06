@@ -8,7 +8,6 @@ app.controller('gameController', [
 
         socket.on('runChatDigest', function() {
             //update message list
-            console.log('oh new stuff?');
             SocketFactory.getMessageList(function(messageList) {
                 $scope.messages = messageList;
             })
@@ -34,7 +33,6 @@ app.controller('gameController', [
             if (event.which === 13) {
                 event.preventDefault();
                 SocketFactory.addNewMessage(msg);
-                console.log('hey ' + $scope.view.me + ' is sending wants to add this to the chat: ' + msg.body);
                 $scope.view.input = "";
             }
         }

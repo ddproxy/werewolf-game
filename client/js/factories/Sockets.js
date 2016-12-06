@@ -9,17 +9,7 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams, $locat
         socket.emit('update');
     });
     socket.on('updateMessagesList', function(data) {
-        console.log('-----');
-        console.log('ahhhhhhh ok....I will make my master list the same');
-        console.log('--------');
-        console.log('messagelist before');
-        console.log(messageList);
-        console.log('-----');
         messageList = data;
-        console.log('--------');
-        console.log('messagelist after');
-        console.log(messageList);
-        console.log('-----');
         socket.emit('updateChat');
     });
 
@@ -28,16 +18,7 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams, $locat
         callback(gameList);
     }
     obj.addNewMessage = function(message) {
-        console.log('--------');
-        console.log('message list before');
-        console.log(messageList);
-        console.log('--------');
-        console.log('adding a message');
-        console.log(message);
-        console.log('--------');
         messageList.push(message);
-        console.log('message list after');
-        console.log(messageList);
 
         socket.emit('addToMessageList', messageList);
     }
