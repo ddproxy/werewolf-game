@@ -5,14 +5,15 @@ app.factory('moderatorFactory', ['$location', function ($location) {
 
 		this.userList = [];
 
+		this.fillUserList = function(array){
+			this.userList = array;
+		}
+
 		this.start = function () {
 			//randomly assigns each user with their class
 			var roles = ["citizen", "citizen", "citizen", "werewolf", "werewolf", "witchdoctor", "hunter",
 						 "fortuneteller"];
 
-			if (this.userList.length < 1) {
-				("Wait till the room is full");
-			} else {
 				for (i = 0; i <= 7; i++) {
 					this.gameObject[this.userList[i]] = new Player(roles[i]);
 					if (roles[i] === "witchdoctor") {

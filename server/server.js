@@ -24,30 +24,54 @@ io.on('connection', function(socket) {
     socket.on('authenticated?', function(token) {
         jwt.verify(token, 'secret', function(err, decoded) {
             if (err) {
-              socket.emit('gtfo');
-            }
-            else if (decoded) {
+                socket.emit('gtfo');
+                console.log(err);
+            } else if (decoded) {
                 currentUser = {
                     username: decoded.username,
                     socket: socket,
                     room: undefined
                 };
-              //   if (!_.find(usersOnline, (user) => {
-              //     return (user.username !== currentUser.username)
-              // })) {
-              // }
-              usersOnline.push(currentUser);
+
+
+                if(usersOnline.length < 1){
+
+                console.log('auth for: ' + currentUser.username);
+                console.log('-------------');
+                usersOnline.push(currentUser);
+                console.log(currentUser.username + " is now in users online");
+                console.log('-------------');
+              }
+
+                for (var i = 0; i < usersOnline.length; i++) {
+                    console.log('-------------');
+                    console.log("user:" + i);
+                    console.log(usersOnline[i].username);
+                    console.log('-------------');
+                    if (usersOnline[i].username == currentUser.username) {
+                          console.log("removed: " + usersOnline[i].username);
+                        _.remove(usersOnline, usersOnline[i]);
+                    }
+                }
+
+
+                console.log('-------------');
+                usersOnline.push(currentUser);
+                console.log(currentUser.username + " is now in users online");
+                console.log('-------------');
             }
+
         });
 
 
         socket.on('joingame', function(roomNumber) {
+
             //if no room number - then add them to room
             if (_.find(usersOnline, (user) => {
                     return (user.username == currentUser.username) && (user.room !== roomNumber);
                 })) {
                 if (currentUser.room !== undefined) {
-                  oldRoom = currentUser.room;
+                    oldRoom = currentUser.room;
                 }
                 currentUser.room = roomNumber;
                 usersOnline = _.uniq(usersOnline);
@@ -90,13 +114,20 @@ io.on('connection', function(socket) {
             })
         });
 
-        socket.on('update', function(){
-          io.emit('runDigest');
+        socket.on('update', function() {
+            io.emit('runDigest');
         })
     });
 
     socket.on('disconnect', function() {
         console.log('disconnected');
+        if (currentUser) {
+            _.remove(usersOnline, currentUser);
+            currentUser = false;
+        }
+    })
+    socket.on('logout', function() {
+        console.log('logged out');
         if (currentUser) {
             _.remove(usersOnline, currentUser);
             currentUser = false;

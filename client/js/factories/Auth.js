@@ -30,9 +30,11 @@ app.factory('AuthFactory', function($http, $localStorage, $location) {
 
     service.Logout = function() {
         // remove user from local storage and clear http auth header
+        socket.emit('joingame', 'logout');
         delete $localStorage.currentUser;
         $http.defaults.headers.common.Authorization = '';
         $location.url('/login');
+        socket.emit('logout');
     };
 
     if ($localStorage.currentUser) {
