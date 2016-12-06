@@ -180,6 +180,9 @@ app.use('/api', auth);
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
+app.get('/game', function(req, res) {
+    res.sendFile(path.join(__dirname, '../client', 'game.html'));
+});
 
 app.get('/api', function(req, res) {
     res.send("I'm an api");
