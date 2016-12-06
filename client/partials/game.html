@@ -30,20 +30,17 @@
     <div class="eight wide column wholeframe">
       <div class="ui comments">
         <h3 class="ui dividing header">Comments</h3>
-        <div ng-repeat="message in messages" class="comment">
+        <div ng-repeat="message in messages track by $index" class="comment">
           <div class="content">
-            <a class="author">Matt</a>
+            <a class="author">{{message.author}}</a>
             <div class="text">
-              {{message}}
+              {{message.body}}
             </div>
           </div>
         </div>
         <form action="">
           <div class="field">
-            <input ng-model='view.input' id="m" autocomplete="off"></input>
-          </div>
-          <div class="ui blue labeled submit icon button" ng-click='submit()'>
-            <i class="icon edit"></i> Send
+            <input ng-model='view.input' id="m" autocomplete="off" ng-keypress='sendMessage($event)'></input>
           </div>
         </form>
       </div>

@@ -12,7 +12,6 @@ app.controller('waitingRoomController', ['$scope', '$http', '$location', '$windo
         })
 
         socket.on('goToRoom', function(room) {
-            console.log('game has started I should move');
             $scope.$apply(function() {
                 $location.url('/game/' + room);
             })

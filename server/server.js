@@ -115,7 +115,30 @@ io.on('connection', function(socket) {
         socket.on('update', function() {
             io.emit('runDigest');
         })
+
+        socket.on('updateChat', function() {
+            console.log('HEY - NEW CHATS!');
+            io.emit('runChatDigest');
+        })
+
+        socket.on('addToMessageList', function(messageList){
+          console.log('ok i see your list');
+          console.log('messageList');
+          var players = _.filter(usersOnline, function(user) {
+              return (user.room == messageList[0].room);
+          });
+
+          players.map(function(user){
+            console.log('---------');
+            console.log('ok notifying: ' + user.username + ' of an updated message list');
+            console.log('---------');
+            user.socket.emit('updateMessagesList', messageList)
+          })
+        })
+
+
     });
+
 
     socket.on('disconnect', function() {
         if (currentUserState) {
