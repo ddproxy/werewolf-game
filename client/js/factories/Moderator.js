@@ -3,8 +3,8 @@ app.factory('moderatorFactory', ['$location', function($location) {
 
 		var playerList = [];
 
-    Moderator.fillUserList = function(array, callback) {
-        playerList = array;
+    Moderator.fillUserList = function(listOfUsers, callback) {
+        playerList = listOfUsers;
         callback()
     }
 

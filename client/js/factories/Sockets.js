@@ -4,13 +4,12 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams) {
 
 
     socket.on('refreshWaitingRoom', function(data) {
-        ("refreshing the waiting room");
-        (data);
         gameList = data;
         socket.emit('update');
     });
 
     socket.on('goToRoom', function(room){
+      console.log('someone in your room went to the room');
       console.log(room);
     })
 

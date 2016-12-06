@@ -22,9 +22,10 @@ app.controller('waitingRoomController',
 
 		 $scope.view.gameStart = function () {
 			 moderatorFactory.fillUserList($scope.view.users, function(){
+				 socket.emit('gamestart',$routeParams.gameid)
 				 moderatorFactory.start($routeParams.gameid);
 			 });
-			 socket.emit('gamestart',$routeParams.gameid)
+
 		 }
 
 		 $scope.rightUser = function(num){

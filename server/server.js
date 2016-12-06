@@ -16,7 +16,7 @@ let usersOnline = [];
 
 //open page
 io.on('connection', function(socket) {
-    let currentUser = false;
+    let currentUserState = false;
     let oldRoom;
 
     //on login
@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
             if (err) {
                 socket.emit('gtfo');
             } else if (decoded) {
-                currentUser = {
+                currentUserState = {
                     username: decoded.username,
                     socket: socket,
                     room: undefined,
@@ -37,17 +37,17 @@ io.on('connection', function(socket) {
 
                 if (usersOnline.length < 1) {
 
-                    usersOnline.push(currentUser);
+                    usersOnline.push(currentUserState);
                 }
 
                 for (var i = 0; i < usersOnline.length; i++) {
-                    if (usersOnline[i].username == currentUser.username) {
+                    if (usersOnline[i].username == currentUserState.username) {
                         _.remove(usersOnline, usersOnline[i]);
                     }
                 }
 
 
-                usersOnline.push(currentUser);
+                usersOnline.push(currentUserState);
             }
 
         });
@@ -57,12 +57,12 @@ io.on('connection', function(socket) {
 
             //if no room number - then add them to room
             if (_.find(usersOnline, (user) => {
-                    return (user.username == currentUser.username) && (user.room !== roomNumber);
+                    return (user.username == currentUserState.username) && (user.room !== roomNumber);
                 })) {
-                if (currentUser.room !== undefined) {
-                    oldRoom = currentUser.room;
+                if (currentUserState.room !== undefined) {
+                    oldRoom = currentUserState.room;
                 }
-                currentUser.room = roomNumber;
+                currentUserState.room = roomNumber;
                 usersOnline = _.uniq(usersOnline);
             }
 
@@ -118,15 +118,15 @@ io.on('connection', function(socket) {
     });
 
     socket.on('disconnect', function() {
-        if (currentUser) {
-            _.remove(usersOnline, currentUser);
-            currentUser = false;
+        if (currentUserState) {
+            _.remove(usersOnline, currentUserState);
+            currentUserState = false;
         }
     })
     socket.on('logout', function() {
-        if (currentUser) {
-            _.remove(usersOnline, currentUser);
-            currentUser = false;
+        if (currentUserState) {
+            _.remove(usersOnline, currentUserState);
+            currentUserState = false;
         }
     })
 
