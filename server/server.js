@@ -34,14 +34,14 @@ io.on('connection', function(socket) {
                 };
 
 
-                if(usersOnline.length < 1){
+                if (usersOnline.length < 1) {
 
-                console.log('auth for: ' + currentUser.username);
-                console.log('-------------');
-                usersOnline.push(currentUser);
-                console.log(currentUser.username + " is now in users online");
-                console.log('-------------');
-              }
+                    console.log('auth for: ' + currentUser.username);
+                    console.log('-------------');
+                    usersOnline.push(currentUser);
+                    console.log(currentUser.username + " is now in users online");
+                    console.log('-------------');
+                }
 
                 for (var i = 0; i < usersOnline.length; i++) {
                     console.log('-------------');
@@ -49,7 +49,7 @@ io.on('connection', function(socket) {
                     console.log(usersOnline[i].username);
                     console.log('-------------');
                     if (usersOnline[i].username == currentUser.username) {
-                          console.log("removed: " + usersOnline[i].username);
+                        console.log("removed: " + usersOnline[i].username);
                         _.remove(usersOnline, usersOnline[i]);
                     }
                 }
@@ -113,6 +113,16 @@ io.on('connection', function(socket) {
                 user.socket.emit('refreshWaitingRoom', updatedGettingRemoved);
             })
         });
+
+        socket.on('startgame', function(roomNumber) {
+            var players = _.filter(usersOnline, function(user) {
+                return (user.room == roomNumber);
+            });
+            players.map(function(user){
+              console.log('sending ' + user.username + 'the signal to go the room');
+              user.socket.emit('goToRoom', user.room)
+            })
+        })
 
         socket.on('update', function() {
             io.emit('runDigest');

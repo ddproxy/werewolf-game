@@ -12,16 +12,21 @@ app.controller('waitingRoomController',
 			 $scope.$apply();
 		 })
 
+		 socket.on('goToRoom', function(room){
+			 console.log("ok I'll go to " + room);
+			 $location.url('/game/' + room)
+		 })
+
 		 $scope.view = {};
 
 		 //When you join the waiting room you are pushed into the user list
 		 $scope.view.users = [];
 
 		 //Update the moderatorFactory everytime a new user is pushed into the list
-		 moderatorFactory.userList = $scope.view.users;
 
 		 $scope.view.gameStart = function () {
-			 moderatorFactory.start();
+			 moderatorFactory.fillUserList($scope.view.users);
+			 moderatorFactory.start($routeParams.gameid);
 		 }
 
 		 $scope.rightUser = function(num){
