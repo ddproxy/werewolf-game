@@ -27,7 +27,7 @@ app.controller('waitingRoomController', ['$scope', '$http', '$location', '$windo
         //Update the moderatorFactory everytime a new user is pushed into the list
 
         $scope.view.gameStart = function() {
-
+            SocketFactory.clearMessageList();
             socket.emit('gamestart', $routeParams.gameid)
             moderatorFactory.start($routeParams.gameid)
         }

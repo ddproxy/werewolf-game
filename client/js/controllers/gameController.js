@@ -20,7 +20,7 @@ app.controller('gameController', [
         })
 
         $scope.view = {};
-        $scope.messages;
+        $scope.messages = [];
         $scope.game;
 
         $scope.sendMessage = function(event) {

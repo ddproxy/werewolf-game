@@ -45,6 +45,10 @@ app.factory('SocketFactory', function($http, $localStorage, $routeParams, $locat
         callback(messageList);
     }
 
+    obj.clearMessageList = function(){
+      messageList = [];
+    }
+
 
 
     return obj;
