@@ -37,10 +37,8 @@ app.controller('homeController', [
         };
 
         $scope.addGame = function(title, id) {
-            ('adding a game');
             $scope.view.showForm = false;
             $http.get('/api/me').then(function(response) {
-              (response.data);
                 var obj = {
                     title: title,
                     id: id,
