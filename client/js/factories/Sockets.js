@@ -1,37 +1,34 @@
-app.factory('SocketFactory', function($http, $localStorage, $routeParams, $location) {
-    var obj = {};
-    var gameList = [];
-    var messageList = [];
+app.factory("SocketFactory", [
+    "$rootScope",
+    function ($rootScope) {
+        var socket = io.connect();
 
+        return {
+            on: function (eventName, callback) {
+                function wrapper () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        callback.apply(socket, args);
+                    });
+                }
 
-    socket.on('refreshWaitingRoom', function(data) {
-        gameList = data;
-        socket.emit('update');
-    });
-    socket.on('updateMessagesList', function(data) {
-        messageList = data;
-        socket.emit('updateChat');
-    });
+                socket.on(eventName, wrapper);
 
+                return function () {
+                    socket.removeListener(eventName, wrapper);
+                };
+            },
 
-    obj.getGameList = function(callback) {
-        callback(gameList);
+            emit: function (eventName, data, callback) {
+                socket.emit(eventName, data, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                });
+            }
+        }
     }
-    obj.addNewMessage = function(message) {
-        messageList.push(message);
-
-        socket.emit('addToMessageList', messageList);
-    }
-    obj.getMessageList = function(callback) {
-        callback(messageList);
-    }
-
-    obj.clearMessageList = function(){
-      messageList = [];
-    }
-
-
-
-    return obj;
-
-})
+]);

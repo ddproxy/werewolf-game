@@ -1,29 +1,41 @@
-app.controller('homeController', [
-    '$scope', '$http', '$location', '$window', 'moderatorFactory', 'SocketFactory', '$localStorage', 'AuthFactory',
-    function($scope, $http, $location, $window, moderatorFactory, SocketFactory, $localStorage, AuthFactory) {
-
-
-        $scope.message = 'controller is booyah'
+app.controller("homeController", [
+    "$scope",
+    "$http",
+    "$location",
+    "$window",
+    "$localStorage",
+    "moderatorFactory",
+    "SocketFactory",
+    "AuthFactory",
+    function ($scope,
+              $http,
+              $location,
+              $window,
+              $localStorage,
+              moderatorFactory,
+              SocketFactory,
+              AuthFactory) {
+        $scope.message = "controller is booyah";
 
         $scope.view = {};
-        $scope.view.games;
-        $scope.gotoroom = function(roomNumber) {
-            $location.url('/waitingroom/' + roomNumber);
+        $scope.view.games = {};
+        $scope.gotoroom = function (roomNumber) {
+            $location.url("/waitingroom/" + roomNumber);
 
         };
         $scope.view.showForm = false;
 
-        $http.get('/api/gameplay/opengames').then(function(response) {
+        $http.get("/api/gameplay/opengames").then(function (response) {
             $scope.view.games = response.data;
         });
 
 
-        $scope.view.go = function(num, callback) {
-            socket.emit('joingame', num)
+        $scope.view.go = function (num, callback) {
+            SocketFactory.emit("joingame", num);
             callback(num);
         };
 
-        $scope.createGame = function() {
+        $scope.createGame = function () {
             $localStorage.currentUser.role = "moderator";
             $scope.view.showForm = true;
             var text = "";
@@ -36,29 +48,30 @@ app.controller('homeController', [
             $scope.view.randomId = text;
         };
 
-        $scope.addGame = function(title, id) {
+        $scope.addGame = function (title, id) {
             $scope.view.showForm = false;
-            $http.get('/api/me').then(function(response) {
+            $http.get("/api/me").then(function (response) {
                 var obj = {
                     title: title,
                     id: id,
                     username: response.data.username
                 };
 
-                $http.post('/api/gameplay/newgame', obj).then(function(response) {
+                $http.post("/api/gameplay/newgame", obj).then(function (response) {
                     if (response.data) {
-                        $location.url('/waitingroom/' + id);
+                        $location.url("/waitingroom/" + id);
                     }
                 })
             })
-
-        }
+        };
 
         $scope.logout = AuthFactory.Logout;
     }
 ]);
 
-
-function GoToRoom(roomNumber) {
-    $location.url('/waitingroom/' + roomNumber);
+// eslint-disable-next-line no-unused-vars
+function GoToRoom (roomNumber) {
+    // This won't work, $location is out of scope
+    // eslint-disable-next-line no-undef
+    $location.url("/waitingroom/" + roomNumber);
 }
