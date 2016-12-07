@@ -1,4 +1,4 @@
-app.service("gameStateService", ['SocketFactory', function (SocketFactory) {
+app.factory("gameStateService", ['SocketFactory', function (SocketFactory) {
 	var gameList = [];
 	SocketFactory.on('refreshWaitingRoom', function (data) {
 		gameList = data;

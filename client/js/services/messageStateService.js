@@ -1,4 +1,4 @@
-app.service("gameStateService", ['SocketFactory', function (SocketFactory) {
+app.factory("messageStateService", ['SocketFactory', function (SocketFactory) {
 	var messageList = [];
 	SocketFactory.on('updateMessagesList', function (data) {
 		messageList = data;

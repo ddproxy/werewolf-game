@@ -1,10 +1,7 @@
-
-'use strict';
-
 require('dotenv').config();
 const pg = require('pg');
 if (process.env.NODE_ENV === 'production') {
-  pg.defaults.ssl = true;
+    pg.defaults.ssl = true;
 }
 
 module.exports = {
@@ -12,16 +9,20 @@ module.exports = {
     development: {
         client: 'pg',
         connection: {
-            host: '127.0.0.1',
-            database: 'werewolf_game_dev'
+            host: process.env.HOST,
+            database: process.env.DATABASE,
+            password: process.env.DATABASE_PASSWORD,
+            user: process.env.DATABASE_USER
         }
     },
 
     test: {
         client: 'pg',
         connection: {
-            host: '127.0.0.1',
-            database: 'werewolf_game_test'
+            host: process.env.HOST,
+            database: process.env.DATABASE,
+            password: process.env.DATABASE_PASSWORD,
+            user: process.env.DATABASE_USER
         }
     },
 

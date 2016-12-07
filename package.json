@@ -33,7 +33,8 @@
   },
   "scripts": {
     "knex": "knex",
-    "nodemon": "nodemon server/server.js",
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js",
     "lint": "eslint src/ test/",
     "lint-watch": "esw -w server/ client/"
   },

@@ -5,6 +5,7 @@ app.controller("waitingRoomController", [
     "$window",
     "moderatorFactory",
     "SocketFactory",
+    "gameStateService",
     "messageStateService",
     "$routeParams",
     function ($scope,
@@ -13,28 +14,29 @@ app.controller("waitingRoomController", [
               $window,
               moderatorFactory,
               SocketFactory,
+              gameStateService,
               messageStateService,
               $routeParams) {
-        SocketFactory.on("runDigest", function () {
+
+        $scope.view = {};
+        //When you join the waiting room you are pushed into the user list
+        $scope.view.users = [];
+
+        // SocketFactory.on("runDigest", function () {
             // ("ALLRIGHT....here is that new shit!");
-            messageStateService.getGameList(function (gameList) {
+            gameStateService.getGameList(function (gameList) {
                 $scope.view.users = gameList;
                 $scope.view.userCount = $scope.view.users.length;
 
             });
-            $scope.$apply();
-        });
+            // $scope.$apply();
+        // });
 
         SocketFactory.on("goToRoom", function (room) {
-            $scope.$apply(function () {
+            // $scope.$apply(function () {
                 $location.url("/game/" + room);
-            })
+            // })
         });
-
-        $scope.view = {};
-
-        //When you join the waiting room you are pushed into the user list
-        $scope.view.users = [];
 
         //Update the moderatorFactory everytime a new user is pushed into the list
 

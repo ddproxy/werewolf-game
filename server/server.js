@@ -63,7 +63,6 @@ http.listen(port, function () {
     ('listening on port: ' + port);
 });
 
-
 //open page
 io.on('connection', function (socket) {
     let currentUserState = false;
@@ -169,17 +168,14 @@ io.on('connection', function (socket) {
         })
     });
 
-    socket.on('disconnect', function () {
+    function removeUserFromOnline () {
         if (currentUserState) {
             _.remove(usersOnline, currentUserState);
             currentUserState = false;
         }
-    });
-
-    socket.on('logout', function () {
-        if (currentUserState) {
-            _.remove(usersOnline, currentUserState);
-            currentUserState = false;
-        }
-    })
+    }
+    socket.on('disconnect', removeUserFromOnline);
+    socket.on('logout', removeUserFromOnline);
 });
+
+console.log("Ready");

@@ -8,6 +8,7 @@ app.factory("SocketFactory", [
                 function wrapper () {
                     var args = arguments;
                     $rootScope.$apply(function () {
+                        console.log(socket, args);
                         callback.apply(socket, args);
                     });
                 }

@@ -7,6 +7,7 @@ app.controller("gameController", [
     "moderatorFactory",
     "SocketFactory",
     "gameStateService",
+    "messageStateService",
     function ($scope,
               $http,
               $location,
@@ -14,7 +15,8 @@ app.controller("gameController", [
               $routeParams,
               moderatorFactory,
               SocketFactory,
-              gameStateService) {
+              gameStateService,
+              messageStateService) {
         $scope.view = {};
         $scope.messages = [];
         $scope.game = {};
@@ -25,10 +27,10 @@ app.controller("gameController", [
 
         SocketFactory.on("runChatDigest", function () {
             //update message list
-            SocketFactory.getMessageList(function (messageList) {
+            messageStateService.getMessageList(function (messageList) {
                 $scope.messages = messageList;
             });
-            $scope.$apply();
+            // $scope.$apply();
         });
 
         gameStateService.getGameList(function (players) {
@@ -43,7 +45,7 @@ app.controller("gameController", [
             };
             if (event.which === 13) {
                 event.preventDefault();
-                SocketFactory.addNewMessage(msg);
+                messageStateService.addNewMessage(msg);
                 $scope.view.input = "";
             }
         }
